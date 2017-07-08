@@ -1,5 +1,12 @@
 .vs/
+Temp/
 Library/
+Assets/BulletXNA/
+Assets/MMD4Mecanim/
+MMD/
+/Assets/BulletXNA.meta
+/Assets/MMD4Mecanim.meta
+/Assets/MMD.meta
 /CharWebCam.csproj
 /CharWebCam.Editor.csproj
 /CharWebCam.sln
