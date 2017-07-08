@@ -1,3 +1,4 @@
+
 # CharWebCam
 普通のWebCamで3Dキャラクター(Unityちゃん)を動かすよ！
 
@@ -17,6 +18,10 @@ RealSenseSDK 2016R3 core & face
 ## 注意
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 音声入力デバイス選択が上手く動作しない場合は、デバイス名を全て半角にしてみてください。(要再起動)
+
+/Assets/RS_Kotonoha.csはMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
+別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
+
 
 ## ライセンス
 © Unity Technologies Japan/UCL
