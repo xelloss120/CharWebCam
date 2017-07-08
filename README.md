@@ -22,6 +22,10 @@ RealSenseSDK 2016R3 core & face
 /Assets/RS_Kotonoha.csはMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
 別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
 
-
 ## ライセンス
 © Unity Technologies Japan/UCL
+
+## 免責
+ご利用は自己責任で！！  
+特にMMDモデルのご利用はMMD4Mの注意事項およびモデル付属の文書をよく読みましょう。  
+そして版権モデルの場合は版権元の規約も読みましょう。
