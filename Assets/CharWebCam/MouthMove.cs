@@ -6,21 +6,22 @@ using Intel.RealSense.Utility;
 
 public class MouthMove : MonoBehaviour
 {
-    // オブジェクト
-    public SkinnedMeshRenderer Mouth;
+    // 音声入力デバイス選択表示
     public Text Text;
 
     // 平滑化
-    Session Session;
+    protected Smoother1D SmoothMouth;
     Smoother Smoother;
-    Smoother1D SmoothMouth;
+    Session Session;
 
-    void Start()
+    /// <summary>
+    /// 音声入力デバイス選択待機
+    /// </summary>
+    protected void Init()
     {
-        // 音声入力デバイス選択待機
         StartCoroutine("SelectMicrophone");
 
-        // 平滑化
+        // 平滑化初期化
         // 参考：https://software.intel.com/sites/landingpage/realsense/camera-sdk/v2016r3/documentation/html/index.html?doc_utils_the_smoother_utility.html
         Session = Session.CreateInstance();
         Smoother = Smoother.CreateInstance(Session);
@@ -62,17 +63,23 @@ public class MouthMove : MonoBehaviour
         }
     }
 
-    void Update()
+    /// <summary>
+    /// 音量取得
+    /// </summary>
+    /// <returns>音量</returns>
+    /// <remarks>
+    /// https://docs.unity3d.com/jp/540/ScriptReference/AudioClip.GetData.html
+    /// </remarks>
+    protected float GetVolume()
     {
         // 録音が開始されていなければ中断
         AudioSource audio = GetComponent<AudioSource>();
         if (audio.clip == null)
         {
-            return;
+            return 0;
         }
 
         // 入力音量取得
-        // 参考：https://docs.unity3d.com/jp/540/ScriptReference/AudioClip.GetData.html
         float[] samples = new float[audio.clip.samples * audio.clip.channels];
         audio.clip.GetData(samples, 0);
         float vol = 0;
@@ -83,22 +90,12 @@ public class MouthMove : MonoBehaviour
         }
         audio.clip.SetData(samples, 0);
 
-        // 口パク
-        if (Mouth != null)
-        {
-            // 参考：https://docs.unity3d.com/ja/540/Manual/BlendShapes.html
-            Mouth.SetBlendShapeWeight(6, SmoothMouth.SmoothValue(vol < 1 ? 0 : vol * 5));
-        }
-        else
-        {
-            // 参考：http://tips.hecomi.com/entry/20131208/1386514048
-            GetComponent<MMD4MecanimModel>().GetMorph("あ").weight = SmoothMouth.SmoothValue(vol < 1 ? 0 : vol / 20);
-        }
+        return vol;
     }
 
     void OnDestroy()
     {
-        // 平滑化
+        // 平滑化開放
         SmoothMouth.Dispose();
         Smoother.Dispose();
         Session.Dispose();

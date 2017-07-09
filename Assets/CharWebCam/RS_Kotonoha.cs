@@ -42,8 +42,6 @@ public class RS_Kotonoha : RealSense
         // 視線
         Vector2 eyesPos = SmoothEyes.SmoothValue(GetEyesPos(Landmark));
         Vector3 eyesAng = new Vector3(eyesPos.x, eyesPos.y, 0);
-        //EyesAng.x = Mathf.Min(10, Mathf.Max(-10, -(float)face.Gaze.GazeVerticalAngle / 2));
-        //EyesAng.y = Mathf.Min(10, Mathf.Max(-10, (float)face.Gaze.GazeHorizontalAngle / 3));
         EyeL.GetComponent<MMD4MecanimBone>().userEulerAngles = eyesAng;
         EyeR.GetComponent<MMD4MecanimBone>().userEulerAngles = eyesAng;
 
