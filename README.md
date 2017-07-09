@@ -20,10 +20,11 @@ RealSenseSDK 2016R3 core & face
 音声入力デバイス選択が上手く動作しない場合は、デバイス名を全て半角にしてみてください。(要再起動)
 
 ## MMDモデル(pmx等)の対応について
-./CharWebCam/Assets/CharWebCam/RS_Kotonoha.csは  
-MMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
-別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。  
-※MMD4Mを追加したら./CharWebCam/Assets/CharWebCam/MMD4MecanimDummyを削除してください。
+./CharWebCam/MMD_Sample/RS_Kotonoha.csと  
+./CharWebCam/MMD_Sample/MM_Kotonoha.csは  
+以下のMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
+http://www.nicovideo.jp/watch/sm24368983  
+別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
 
 ## ライセンス
 © Unity Technologies Japan/UCL
