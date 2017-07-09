@@ -1,18 +1,20 @@
-_exe/
+# âBÇµ
 .vs/
+
+# çÏã∆óp
+_exe/
 Temp/
 Library/
 Assets/BulletXNA/
 Assets/MMD4Mecanim/
-MMD/
+Assets/MMD/
 
+# MMD4Mecanim
 /Assets/BulletXNA.meta
 /Assets/MMD4Mecanim.meta
 /Assets/MMD.meta
 
+# Visual Studio
 /CharWebCam.csproj
 /CharWebCam.Editor.csproj
 /CharWebCam.sln
-
-*.meta
-!Assets/UnityChan/**/*.meta
