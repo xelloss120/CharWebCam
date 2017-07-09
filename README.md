@@ -19,7 +19,7 @@ RealSenseSDK 2016R3 core & face
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 音声入力デバイス選択が上手く動作しない場合は、デバイス名を全て半角にしてみてください。(要再起動)
 
-## MMD対応について
+## MMDモデル(pmx等)の対応について
 ./CharWebCam/Assets/CharWebCam/RS_Kotonoha.csは  
 MMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
 別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。  
