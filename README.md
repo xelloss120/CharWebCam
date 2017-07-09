@@ -21,7 +21,7 @@ RealSenseSDK 2016R3 core & face
 ./CharWebCam/Assets/CharWebCam/RS_Kotonoha.csは  
 MMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
 別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。  
-※MMD4M追加したら./CharWebCam/Assets/CharWebCam/MMD4MecanimDummyを削除してください。
+※MMD4Mを追加したら./CharWebCam/Assets/CharWebCam/MMD4MecanimDummyを削除してください。
 
 ## ライセンス
 © Unity Technologies Japan/UCL
