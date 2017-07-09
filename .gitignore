@@ -1,3 +1,4 @@
+*.meta
 _exe/
 .vs/
 Temp/
