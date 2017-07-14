@@ -92,12 +92,4 @@ public class MouthMove : MonoBehaviour
 
         return vol;
     }
-
-    void OnDestroy()
-    {
-        // 平滑化開放
-        SmoothMouth.Dispose();
-        Smoother.Dispose();
-        Session.Dispose();
-    }
 }

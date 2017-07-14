@@ -80,20 +80,9 @@ public class RealSense : MonoBehaviour
         var face = FaceData.QueryFaceByIndex(0);
         if (face != null)
         {
-            if (face.Detection != null)
-            {
-                FaceRect = face.Detection.BoundingRect;
-            }
-
-            if (face.Landmarks != null && face.Landmarks.Points != null)
-            {
-                Landmark = face.Landmarks.Points;
-            }
-
-            if (face.Expressions != null && face.Expressions.ExpressionResults != null)
-            {
-                FaceExp = face.Expressions.ExpressionResults;
-            }
+            FaceRect = face.Detection.BoundingRect;
+            Landmark = face.Landmarks.Points;
+            FaceExp = face.Expressions.ExpressionResults;
         }
     }
 

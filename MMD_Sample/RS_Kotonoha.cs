@@ -12,6 +12,9 @@ public class RS_Kotonoha : RealSense
 
     // 初期表示位置(オフセット)
     float BodyY;
+    
+    // モーフ取得のため
+    MMD4MecanimModel Model;
 
     void Start()
     {
@@ -20,6 +23,11 @@ public class RS_Kotonoha : RealSense
 
         // 初期表示位置(オフセット)の保持
         BodyY = Body.transform.position.y;
+
+        // 初期表情
+        Model = GetComponent<MMD4MecanimModel>();
+        Model.GetMorph("じと目").weight = 0.5f;
+        Model.GetMorph("眼球縮小").weight = 0.2f;
     }
 
     void Update()
@@ -35,9 +43,6 @@ public class RS_Kotonoha : RealSense
 
         // 頭向き
         Head.transform.localEulerAngles = SmoothHead.SmoothValue(GetHeadAng(Landmark));
-        
-        // モーフ取得のため
-        MMD4MecanimModel model = GetComponent<MMD4MecanimModel>();
 
         // 視線
         Vector2 eyesPos = SmoothEyes.SmoothValue(GetEyesPos(Landmark));
@@ -49,19 +54,19 @@ public class RS_Kotonoha : RealSense
         float eyeL = FaceExp[FaceExpression.EXPRESSION_EYES_CLOSED_LEFT].intensity;
         float eyeR = FaceExp[FaceExpression.EXPRESSION_EYES_CLOSED_RIGHT].intensity;
         float close = SmoothEyesClose.SmoothValue(Mathf.Max(eyeL, eyeR)) / 100;
-        model.GetMorph("ウインク右").weight = close;
-        model.GetMorph("ウインク").weight = close;
+        Model.GetMorph("まばたき").weight = close;
+        Model.GetMorph("じと目").weight = 0.5f - (close / 2);
 
         // 笑顔
         float smile = FaceExp[FaceExpression.EXPRESSION_SMILE].intensity / 100;
-        model.GetMorph("まばたき3").weight = smile;
-        model.GetMorph("笑い").weight = smile;
+        Model.GetMorph("まばたき3").weight = smile;
+        Model.GetMorph("笑い").weight = smile;
 
         // 表情優先の目パチ無効
         if (smile != 0)
         {
-            model.GetMorph("ウインク右").weight = 0;
-            model.GetMorph("ウインク").weight = 0;
+            Model.GetMorph("まばたき").weight = 0;
+            Model.GetMorph("じと目").weight = 0.5f - (smile / 2);
         }
     }
 
@@ -147,11 +152,9 @@ public class RS_Kotonoha : RealSense
         tmp1 = GetCenterRatio(lTop, lEye, lBottom) * 7;
         tmp2 = GetCenterRatio(rTop, rEye, rBottom) * 7;
         float xPos = (tmp1 + tmp2) / 2;
-        tmp1 = GetCenterRatio(lRight, lEye, lLeft) * 30;
-        tmp2 = GetCenterRatio(rRight, rEye, rLeft) * 30;
+        tmp1 = GetCenterRatio(lRight, lEye, lLeft) * 20;
+        tmp2 = GetCenterRatio(rRight, rEye, rLeft) * 20;
         float yPos = (tmp1 + tmp2) / 2;
-
-        print(yPos);
 
         // 唇下と顎下の点から角度計算して頭向きに利用
         return new Vector2(xPos, yPos);
