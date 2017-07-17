@@ -8,9 +8,9 @@ using Intel.RealSense.Utility;
 
 public class RealSense : MonoBehaviour
 {
-    // 例外表示
-    public Text Text;
-    public GameObject Body;
+    public Text ErrorLog;
+    public Text DetectedValue;
+    public Material Material;
 
     // キャラクター制御パラメーター
     protected Vector3 BodyPos;
@@ -38,7 +38,7 @@ public class RealSense : MonoBehaviour
     protected float EyesPosY = 0.2f;
     protected int EyesPosSmoothWeight = 5;
     protected int EyesCloseSmoothWeight = 3;
-    protected int FaceSmoothWeight = 3;
+    protected int FaceSmoothWeight = 10;
 
     // 検出値取得
     protected bool Ready = false;
@@ -50,33 +50,34 @@ public class RealSense : MonoBehaviour
     Dictionary<FaceExpression, FaceExpressionResult> FaceExp;
 
     // 平滑化
-    Smoother Smoother;
-    Smoother3D SmoothBody;
-    Smoother3D SmoothHead;
-    Smoother2D SmoothEyes;
-    Smoother1D SmoothEyesClose;
-    Smoother1D SmoothBrowRai;
-    Smoother1D SmoothBrowLow;
-    Smoother1D SmoothSmile;
-    Smoother1D SmoothKiss;
-    Smoother1D SmoothMouth;
-    Smoother1D SmoothTongue;
+    Smoother Smoother = null;
+    Smoother3D SmoothBody = null;
+    Smoother3D SmoothHead = null;
+    Smoother2D SmoothEyes = null;
+    Smoother1D SmoothEyesClose = null;
+    Smoother1D SmoothBrowRai = null;
+    Smoother1D SmoothBrowLow = null;
+    Smoother1D SmoothSmile = null;
+    Smoother1D SmoothKiss = null;
+    Smoother1D SmoothMouth = null;
+    Smoother1D SmoothTongue = null;
 
     // RealSense
-    SenseManager SenseManager;
-    FaceModule FaceModule;
-    FaceData FaceData;
-    FaceConfiguration FaceConfig;
+    SenseManager SenseManager = null;
+    FaceModule FaceModule = null;
+    FaceData FaceData = null;
+    FaceConfiguration FaceConfig = null;
+    SampleReader SampleReader = null;
+    NativeTexturePlugin Texture;
+    IntPtr TexPtr = IntPtr.Zero;
 
     protected void Init()
     {
-        // 初期表示位置(オフセット)の保持
-        BodyPosYOffset = Body.transform.position.y; ;
-
         try
         {
             // RealSense初期化
             // 参考：https://software.intel.com/sites/landingpage/realsense/camera-sdk/v2016r3/documentation/html/index.html?doc_face_general_procedure.html
+            // 参考：.\Intel\RSSDK\sample\core\RawStreams.unity
             SenseManager = SenseManager.CreateInstance();
 
             FaceModule = FaceModule.Activate(SenseManager);
@@ -88,8 +89,18 @@ public class RealSense : MonoBehaviour
             FaceConfig.Expressions.Properties.Enabled = true;
             FaceConfig.ApplyChanges();
 
+            SampleReader = SampleReader.Activate(SenseManager);
+            SampleReader.EnableStream(StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
+            SampleReader.SampleArrived += SampleReader_SampleArrived;
+
             SenseManager.Init();
             SenseManager.StreamFrames(false);
+
+            // RawStreams
+            Texture = NativeTexturePlugin.Activate();
+            Material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
+            Material.mainTextureScale = new Vector2(-1, -1);
+            TexPtr = Material.mainTexture.GetNativeTexturePtr();
 
             // 解像度取得
             StreamProfileSet profile;
@@ -113,9 +124,17 @@ public class RealSense : MonoBehaviour
         }
         catch (Exception e)
         {
-            Text.text = "RealSense Error\n";
-            Text.text += e.Message;
+            ErrorLog.text = "RealSense Error\n";
+            ErrorLog.text += e.Message;
         }
+    }
+
+    /// <summary>
+    /// カメラ映像を更新
+    /// </summary>
+    private void SampleReader_SampleArrived(object sender, SampleArrivedEventArgs args)
+    {
+        if (args.sample.Color != null) Texture.UpdateTextureNative(args.sample.Color, TexPtr);
     }
 
     /// <summary>
@@ -145,16 +164,17 @@ public class RealSense : MonoBehaviour
             float eyeL = FaceExp[FaceExpression.EXPRESSION_EYES_CLOSED_LEFT].intensity;
             float eyeR = FaceExp[FaceExpression.EXPRESSION_EYES_CLOSED_RIGHT].intensity;
             EyesClose = SmoothEyesClose.SmoothValue(Mathf.Max(eyeL, eyeR));
+            EyesClose = EyesClose < 50 ? 0 : (EyesClose - 50) * 2;
 
             // 眉上
-            float browLowL = FaceExp[FaceExpression.EXPRESSION_BROW_LOWERER_LEFT].intensity;
-            float browLowR = FaceExp[FaceExpression.EXPRESSION_BROW_LOWERER_RIGHT].intensity;
-            BrowLow = SmoothBrowLow.SmoothValue(Mathf.Max(browLowL, browLowR));
-
-            // 眉下
             float browRaiL = FaceExp[FaceExpression.EXPRESSION_BROW_RAISER_LEFT].intensity;
             float browRaiR = FaceExp[FaceExpression.EXPRESSION_BROW_RAISER_RIGHT].intensity;
             BrowRai = SmoothBrowRai.SmoothValue(Mathf.Max(browRaiL, browRaiR));
+
+            // 眉下
+            float browLowL = FaceExp[FaceExpression.EXPRESSION_BROW_LOWERER_LEFT].intensity;
+            float browLowR = FaceExp[FaceExpression.EXPRESSION_BROW_LOWERER_RIGHT].intensity;
+            BrowLow = SmoothBrowLow.SmoothValue(Mathf.Max(browLowL, browLowR));
 
             // 笑顔
             Smile = SmoothSmile.SmoothValue(FaceExp[FaceExpression.EXPRESSION_SMILE].intensity);
@@ -170,6 +190,25 @@ public class RealSense : MonoBehaviour
 
             Ready = true;
         }
+    }
+
+    /// <summary>
+    /// 検出値表示用文字列の取得
+    /// </summary>
+    protected void UpdateParamText()
+    {
+        string text = "";
+        text += "BodyPos\n" + BodyPos + "\n";
+        text += "HeadAng\n" + HeadAng + "\n";
+        text += "EyesPos\n" + EyesPos + "\n";
+        text += "EyesClose : " + EyesClose + "\n";
+        text += "BrowRai : " + BrowRai + "\n";
+        text += "BrowLow : " + BrowLow + "\n";
+        text += "Smile : " + Smile + "\n";
+        text += "Kiss : " + Kiss + "\n";
+        text += "Mouth : " + Mouth + "\n";
+        text += "Tongue : " + Tongue + "\n";
+        DetectedValue.text = text;
     }
 
     /// <summary>
@@ -293,23 +332,24 @@ public class RealSense : MonoBehaviour
     void OnDestroy()
     {
         // 平滑化開放
-        SmoothTongue.Dispose();
-        SmoothMouth.Dispose();
-        SmoothKiss.Dispose();
-        SmoothSmile.Dispose();
-        SmoothBrowLow.Dispose();
-        SmoothBrowRai.Dispose();
-        SmoothEyesClose.Dispose();
-        SmoothEyes.Dispose();
-        SmoothHead.Dispose();
-        SmoothBody.Dispose();
-        Smoother.Dispose();
+        if (SmoothTongue != null) SmoothTongue.Dispose();
+        if (SmoothMouth != null) SmoothMouth.Dispose();
+        if (SmoothKiss != null) SmoothKiss.Dispose();
+        if (SmoothSmile != null) SmoothSmile.Dispose();
+        if (SmoothBrowLow != null) SmoothBrowLow.Dispose();
+        if (SmoothBrowRai != null) SmoothBrowRai.Dispose();
+        if (SmoothEyesClose != null) SmoothEyesClose.Dispose();
+        if (SmoothEyes != null) SmoothEyes.Dispose();
+        if (SmoothHead != null) SmoothHead.Dispose();
+        if (SmoothBody != null) SmoothBody.Dispose();
+        if (Smoother != null) Smoother.Dispose();
 
         // RealSense開放
-        FaceModule.FrameProcessed -= FaceModule_FrameProcessed;
-        FaceConfig.Dispose();
-        FaceData.Dispose();
-        FaceModule.Dispose();
-        SenseManager.Dispose();
+        if (FaceModule != null) FaceModule.FrameProcessed -= FaceModule_FrameProcessed;
+        if (SampleReader != null) SampleReader.Dispose();
+        if (FaceData != null) FaceData.Dispose();
+        if (FaceConfig != null) FaceConfig.Dispose();
+        if (FaceModule != null) FaceModule.Dispose();
+        if (SenseManager != null) SenseManager.Dispose();
     }
 }

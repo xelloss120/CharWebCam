@@ -2,6 +2,7 @@
 
 public class RS_Kotonoha : RealSense
 {
+    public GameObject Body;
     public GameObject Head;
     public GameObject EyeL;
     public GameObject EyeR;
@@ -13,6 +14,7 @@ public class RS_Kotonoha : RealSense
     {
         EyesPosX = 20;
         EyesPosY = 7;
+        BodyPosYOffset = Body.transform.position.y;
 
         Init();
 
@@ -29,6 +31,9 @@ public class RS_Kotonoha : RealSense
         {
             return;
         }
+
+        // 各パラメータ表示
+        UpdateParamText();
 
         // 体移動
         Body.transform.position = BodyPos;
@@ -61,14 +66,14 @@ public class RS_Kotonoha : RealSense
         Model.GetMorph("眼球縮小").weight = Kiss * 0.02f + 0.2f;
 
         // 表情競合対策
-        if (Smile != 0 || BrowLow != 0)
+        if (Smile > 10 || BrowLow > 10)
         {
             Model.GetMorph("まばたき").weight = 0;
 
             float ret = Mathf.Max(Smile, BrowLow);
             Model.GetMorph("じと目").weight = 0.7f - (ret * 0.007f);
         }
-        if(Smile > BrowLow / 2)
+        if(Smile > BrowLow / 2 || Kiss > BrowLow / 2)
         {
             Model.GetMorph("下").weight = 0;
             Model.GetMorph("上まぶた閉").weight = 0;
