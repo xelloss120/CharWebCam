@@ -48,7 +48,6 @@ public class RS_Kotonoha : RealSense
 
         // 目パチ
         Model.GetMorph("まばたき").weight = EyesClose / 100;
-        Model.GetMorph("じと目").weight = 0.7f - (EyesClose * 0.007f);
 
         // 眉上
         Model.GetMorph("上").weight = BrowRai / 100;
@@ -69,14 +68,13 @@ public class RS_Kotonoha : RealSense
         if (Smile > 10 || BrowLow > 10)
         {
             Model.GetMorph("まばたき").weight = 0;
-
-            float ret = Mathf.Max(Smile, BrowLow);
-            Model.GetMorph("じと目").weight = 0.7f - (ret * 0.007f);
         }
         if(Smile > BrowLow / 2 || Kiss > BrowLow / 2)
         {
             Model.GetMorph("下").weight = 0;
             Model.GetMorph("上まぶた閉").weight = 0;
         }
+        float ret = Mathf.Max(EyesClose, Mathf.Max(Smile, Mathf.Max(BrowRai, BrowLow)));
+        Model.GetMorph("じと目").weight = 0.7f - (ret * 0.007f);
     }
 }
