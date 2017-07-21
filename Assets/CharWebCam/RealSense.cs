@@ -345,8 +345,9 @@ public class RealSense : MonoBehaviour
         if (Smoother != null) Smoother.Dispose();
 
         // RealSense開放
-        if (FaceModule != null) FaceModule.FrameProcessed -= FaceModule_FrameProcessed;
+        if (SampleReader != null) SampleReader.SampleArrived -= SampleReader_SampleArrived;
         if (SampleReader != null) SampleReader.Dispose();
+        if (FaceModule != null) FaceModule.FrameProcessed -= FaceModule_FrameProcessed;
         if (FaceData != null) FaceData.Dispose();
         if (FaceConfig != null) FaceConfig.Dispose();
         if (FaceModule != null) FaceModule.Dispose();
