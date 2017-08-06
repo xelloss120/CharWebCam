@@ -36,8 +36,8 @@ public class RS_UnityChan : RealSense
         Head.transform.localEulerAngles = new Vector3(HeadAng.x, HeadAng.y, HeadAng.z + 10);
 
         // 視線
-        EyeL.material.SetTextureOffset("_MainTex", EyesPos);
-        EyeR.material.SetTextureOffset("_MainTex", EyesPos);
+        EyeL.material.SetTextureOffset("_MainTex", EyesPos * 0.5f);
+        EyeR.material.SetTextureOffset("_MainTex", EyesPos * 0.5f);
 
         // 目パチ
         EYE_DEF.SetBlendShapeWeight(6, EyesClose);
