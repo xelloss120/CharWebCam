@@ -1,3 +1,4 @@
+
 # CharWebCam
 普通のWebCamで3Dキャラクター(Unityちゃん)を動かすよ！
 
@@ -24,6 +25,9 @@ RealSenseSDK 2016R3 core & face
 以下のMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
 http://www.nicovideo.jp/watch/sm24368983  
 別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
+
+参考
+http://qiita.com/Hv2RMjHzDyqXVIr/items/7e1aca3506a05aa20644
 
 ## ライセンス
 © Unity Technologies Japan/UCL
