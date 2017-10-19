@@ -1,4 +1,3 @@
-
 # CharWebCam
 普通のWebCamで3Dキャラクター(Unityちゃん)を動かすよ！
 
@@ -40,4 +39,8 @@ http://qiita.com/Hv2RMjHzDyqXVIr/items/7e1aca3506a05aa20644
 ## 実行形式(exe)版
 https://1drv.ms/u/s!Ass7Jg1DXnrDlBoBFcokzBZX2Tm9  
 開発環境のPCと手持ちのノートで動作確認していますが、正直怪しいのでダメだったら教えてください。  
-※保存先のパスに全角が混ざるとダメらしいので、半角のみで構成される保存先(パス)に置いて実行してください。  
+※保存先のパスに全角が混ざるとダメらしいので、半角のみで構成される保存先(パス)に置いて実行してください。
+
+## プロ生ちゃん版
+https://1drv.ms/u/s!Ass7Jg1DXnrDmR83V47_raOXKTUj  
+ここで公開しているものを使ってプロ生ちゃん版を作ってみました。
