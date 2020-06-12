@@ -29,8 +29,8 @@ http://www.nicovideo.jp/watch/sm24368983
 http://qiita.com/Hv2RMjHzDyqXVIr/items/7e1aca3506a05aa20644
 
 ## ライセンス
-RealSenseSDK：使用バージョンに準拠
-ユニティちゃん：© Unity Technologies Japan/UCL
+RealSenseSDK：使用バージョンに準拠  
+ユニティちゃん：© Unity Technologies Japan/UCL  
 その他(120作成部分)：MIT
 
 ## 免責
