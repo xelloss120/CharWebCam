@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections;
@@ -45,6 +45,7 @@ public class RSPostBuildProcessor
 
 		// Destination directory path to place runtime contents
 		string destPath = Path.Combine(Directory.GetParent (pathToBuiltProject).FullName, Path.Combine (Path.GetFileNameWithoutExtension (pathToBuiltProject) + "_Data", "Plugins"));
+		destPath = Directory.GetDirectories(destPath)[0];
 		destPath = Path.Combine (destPath, "runtime");
 
 		int componentCopyCount = 0; // counter for actually contents copied.
