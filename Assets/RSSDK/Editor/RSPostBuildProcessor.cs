@@ -15,7 +15,7 @@ public class RSPostBuildProcessor
 	/// Clears the console.
 	/// </summary>
 	static void ClearEditorConsole () {
-		var logEntries = System.Type.GetType("UnityEditorInternal.LogEntries,UnityEditor.dll");
+		var logEntries = System.Type.GetType("UnityEditor.LogEntries,UnityEditor.dll");
 		var clear = logEntries.GetMethod("Clear", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
 		clear.Invoke(null,null);
 	}
