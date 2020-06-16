@@ -625,10 +625,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 38a91c5f-325b-4d24-a111-b61f618b0460
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: CharWebCam
-  organizationId: xelloss120
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
