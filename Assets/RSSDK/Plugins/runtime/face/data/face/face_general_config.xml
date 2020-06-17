@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Face>
+  <GeneralConfiguration>
+    <DepthImage winSize="7" />
+    <Alerts alertsThreshold="10" />
+    <Timer PERFORMANCE_DATA="disable" /> <!-- Options are: enable / disable-->
+    <DumpLevel path="C:\temp\measures_level.csv" />
+    <Preprocess useGamma="true" />
+    <PostProcess enablePostProcessing="true" />
+    <Internal ivcam_width="640" /> <!-- QVGA (320x240), VGA (640x480)-->
+    <Internal ivcam_height="480" /> <!-- QVGA (320x240), VGA (640x480)-->
+    <Internal ds4_width="640" />  <!-- QVGA (320x240), VGA (640x480)-->
+    <Internal ds4_height="480" />  <!-- QVGA (320x240), VGA (640x480)-->
+    <Debug dumpImages="false" dumpFrames="" clipName="" output="C:\work\_junk\%ClipName%_frame_%FrameNum%_%Timestamp%" /> <!-- Format Options: %ClipName%  | %FrameNum% | %TimeStamp% -->
+  </GeneralConfiguration>
+</Face>

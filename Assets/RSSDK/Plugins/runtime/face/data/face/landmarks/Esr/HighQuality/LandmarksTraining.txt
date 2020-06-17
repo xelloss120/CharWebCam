@@ -1,0 +1,2 @@
+FULL Original CSV Set Chin points 350*20 = 7000
+573 based on changeset 242447 (TrainingChinPoints)  -- RandGT is not pose conditioned but the target is now the "random" shape
