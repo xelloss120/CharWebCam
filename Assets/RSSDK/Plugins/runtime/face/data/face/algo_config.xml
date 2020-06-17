@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Algos>
+  <Face>
+    <Detection>
+      <Detection2DAlgo>
+        <DS4 name="ILC"/> 
+        <IVCAM name="ILC"/>
+      </Detection2DAlgo>
+      <Detection3DAlgo> 
+        <DS4 name="ILC"/>
+        <IVCAM name="ILC"/>
+      </Detection3DAlgo>
+      <ILC>
+         <DS4>
+           <mode value="1"/> <!-- Fast = 0 , Accurate = 1 -->
+          <rate value="30"/>
+          <minz value="48"/>
+          <maxz value="3500"/>
+          <zscale value="1.1"/>
+           <fdtype value="4"/><!-- FD_FRONTAL=0, FD_NEAR_FRONTAL=1, FD_HALF_MVIEW=2, FD_HALF_OMNI=3, FD_HALF_OMNI_MVIEW=4, FD_FULL_OMNI_MVIEW=5 -->
+        </DS4>
+        <IVCAM>
+          <mode value="1"/> <!-- Fast = 0 , Accurate = 1 -->
+          <rate value="30"/>
+          <minz value="64"/>
+          <maxz value="512"/>
+          <zscale value="1.2"/>
+          <fdtype value="4"/><!-- FD_FRONTAL=0, FD_NEAR_FRONTAL=1, FD_HALF_MVIEW=2, FD_HALF_OMNI=3, FD_HALF_OMNI_MVIEW=4, FD_FULL_OMNI_MVIEW=5 -->
+        </IVCAM>
+      </ILC>
+    </Detection>
+  </Face>  
+  
+  <DepthFace>
+    <TrackingPreferences>
+      <General
+        RectVersion = "1.0"
+        numCountourSamples = "60"
+        numNearestNeighbors = "7"
+        maxAcceptableSquareDiff = "25"
+        gaussMaskSize = "11"
+        headRegionSize = "13"
+        minMatchingSize = "10"
+        minDepthRatio = "0.83"
+        maxDepthRatio = "1.17"        
+        maxOnBoundaryPixelsRatio = "0.15"        
+        headDepthTestWidth3D = "6"      
+        headDepthTestHeight3D = "6"
+        occludingPixelsThreshold = "0.17"
+        boundarySizeRatioThreshold = "0.3"
+        minNumTracePoints = "80"
+        expectedDepthRatio ="0.75"
+        expectedWidthTh = "90"
+        expectedHeightTh = "110"        
+        headWidth = "150"
+        headHeight = "210"
+        maxValidDepthForOcclusionAlert = "800"
+        occlusionDeltaDepthScale = "0.1"
+        numFramesForRectangleSewing= "5"
+      />
+      <CreativeParameters
+          minClosePixelsRatio3D = "0.65"
+          minClosePixelsRatio2D = "0.15"
+          maxSupportedDistance = "1300" 
+          minSupportedDistance = "0"
+          centerRepositionFactor = "0.2"
+          expectedWidthFactor = "1.0"          
+          referenceHeadWidthError3D = "2.2"   
+          referenceHeadWidthError2D = "1.8"                                 
+          roiHeightMargin ="0.65"
+          roiWidthMargin = "1.1"
+          topPointTraversalWidthFactor = "0.95"
+          candidateStepFactorW = "0.5"
+          candidateStepFactorH = "0.4"
+          moveSeedToMinZWinSize = "0"
+          addPrevMotionToEstimatedSeed = "false"
+          relativeHeadWidthError3D = "50"
+          relativeHeadWidthError2D = "20"
+      />      
+      <IvcamParameters
+        minClosePixelsRatio3D = "0.6"
+        minClosePixelsRatio2D = "0.1"
+        maxSupportedDistance = "750"
+        minSupportedDistance = "0"
+        centerRepositionFactor = "0.15"
+        expectedWidthFactor = "0.75"
+        referenceHeadWidthError3D = "2.2"
+        referenceHeadWidthError2D = "1.8"       
+        roiHeightMargin ="0.7"
+        roiWidthMargin = "1.1"
+        topPointTraversalWidthFactor = "0.95"
+        candidateStepFactorW = "0.5"
+        candidateStepFactorH = "0.4"
+        moveSeedToMinZWinSize = "0"
+        addPrevMotionToEstimatedSeed = "false"
+        relativeHeadWidthError3D = "50"
+        relativeHeadWidthError2D = "20"
+      />
+      <DS4Parameters
+          minClosePixelsRatio3D = "0.3"
+          minClosePixelsRatio2D = "0.12"
+          maxSupportedDistance = "4800"
+          minSupportedDistance = "600"
+          centerRepositionFactor = "0.2"
+          expectedWidthFactor = "1.0"
+          referenceHeadWidthError3D = "2.8"
+          referenceHeadWidthError2D = "2.5"          
+          roiHeightMargin ="0.58"
+          roiWidthMargin = "1.1"
+          topPointTraversalWidthFactor = "1.35"
+          candidateStepFactorW = "0.4"
+          candidateStepFactorH = "0.3"
+          moveSeedToMinZWinSize = "5"
+          addPrevMotionToEstimatedSeed = "true"
+          relativeHeadWidthError3D = "55"
+          relativeHeadWidthError2D = "55"
+      />
+    </TrackingPreferences>
+  </DepthFace>
+
+  <Landmarks>
+    <DepthLimits>
+      <IVCam max="750"
+             min="20"/>
+      <DS4 max="2500"
+           min="800"/>
+    </DepthLimits>
+    <Smoothing enableSmoothing="true">
+      <Smoothing_Low alpha="1.0"
+                     smoothDepthSigma="4">
+        <Group>
+          <Alias value="LANDMARK_GROUP_LEFT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EYE"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYE"/>
+          <Alias value="LANDMARK_GROUP_NOSE"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EAR"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EAR"/>
+          <AffineSigma value="0.5"/>
+          <SmoothSigma value="1.5"/>
+        </Group>
+        <Group>
+          <Alias value="LANDMARK_GROUP_MOUTH"/>
+          <Alias value="LANDMARK_GROUP_JAW"/>
+          <AffineSigma value="0.5"/>
+          <SmoothSigma value="0.05"/>
+        </Group>
+        <Point alias="LANDMARK_EYE_LEFT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+        <Point alias="LANDMARK_EYE_RIGHT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+      </Smoothing_Low>
+      <Smoothing_Medium alpha="0.9"
+                        smoothDepthSigma="4">
+        <Group>
+          <Alias value="LANDMARK_GROUP_LEFT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EYE"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYE"/>
+          <Alias value="LANDMARK_GROUP_NOSE"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EAR"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EAR"/>
+          <AffineSigma value="1.5"/>
+          <SmoothSigma value="2.5"/>
+        </Group>
+        <Group>
+          <Alias value="LANDMARK_GROUP_MOUTH"/>
+          <AffineSigma value="0.5"/>
+          <SmoothSigma value="0.5"/>
+        </Group>
+        <Group>
+          <Alias value="LANDMARK_GROUP_JAW"/>
+          <AffineSigma value="1.5"/>
+          <SmoothSigma value="3.0"/>
+        </Group>
+        <Point alias="LANDMARK_EYE_LEFT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+        <Point alias="LANDMARK_EYE_RIGHT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+      </Smoothing_Medium>
+      <Smoothing_High alpha="0.7"
+                      smoothDepthSigma="4">
+        <Group>
+          <Alias value="LANDMARK_GROUP_LEFT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYEBROW"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EYE"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EYE"/>
+          <Alias value="LANDMARK_GROUP_NOSE"/>
+          <Alias value="LANDMARK_GROUP_LEFT_EAR"/>
+          <Alias value="LANDMARK_GROUP_RIGHT_EAR"/>
+          <Alias value="LANDMARK_GROUP_JAW"/>
+          <Alias value="LANDMARK_GROUP_MOUTH"/>
+          <AffineSigma value="0.5"/>
+          <SmoothSigma value="5"/>
+        </Group>
+        <Point alias="LANDMARK_EYE_LEFT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+        <Point alias="LANDMARK_EYE_RIGHT_CENTER">
+          <AffineSigma value="0.15"/>
+          <SmoothSigma value="5"/>
+        </Point>
+      </Smoothing_High>
+    </Smoothing>
+    <Prerequisites>
+      <SmallestFaceRect rectEdge="30"/>
+    </Prerequisites>
+    <Esr>
+      <Environment relativeDir="landmarks/Esr"/>
+      <Processor enableBlackening="true"
+                 enableRectMotion="true"
+                 useDepthInHybrid="false">
+        <RectMotion minMotionToApply="8"/>
+        <Blackening dilationKernelSize="5"
+                    enableDialation="true"
+                    useDepth="true"/>
+        <DepthProcessor enableAveraging="true"
+                        enableCompleteMissingLMDepth="true"
+                        meanHalf="2"
+                        minHasDepthThreshold="1"/>
+      </Processor>
+      <Confidence enableConfidence="true">
+        <ConcensusConfidence enableConcensusConfidence="true"
+                             failureConcensusThreshold="16"
+                             successConcensusThreshold="8"/>
+        <TemporalConfidence enableTemporalConfidence="false"
+                            maxRectMotionDx="10"
+                            maxRectMotionDy="7"
+                            minTemporalAlpha="0.03"
+                            temporalRate="0.4"
+                            temporalSigma="15"/>
+        <OutOfFovConfidence enableOutOfFovConfidence="false"/>
+        <LandmarksAlertsConfidence enableLandmarksAlertsConfidence="false"/>
+        <ShapeNormalizedEyesConfidence enableNormalizedEyesConfidence="false"
+                                       lowerThreshold="0.75"
+                                       upperThresholdBias="1.2"
+                                       upperThresholdSlope="0.015"/>
+        <EyeDistanceConfidence enableEyeDistanceConfidence="false"
+                               rateHigh="1.4"
+                               rateLow="0.52"/>
+        <ShapeAspectRatioConfidence aspectRatioHigh="1.8"
+                                    aspectRatioLow="0.71"
+                                    enableShapeAspectRatioConfidence="true"
+                                    maximalPitch="25"
+                                    minimalPitch="-7"
+                                    skewLimit="0.35"/>
+        <ShapeBoundingBoxConfidence depthScaleRatioLowerBound="0.7"
+                                    depthScaleRatioUpperBound="1.4"
+                                    enableShapeBoundingBoxConfidence="true"
+                                    maximalPitch="25"
+                                    minimalPitch="-7"
+                                    shapeAreaToRectAreaRatioHighTh="0.27"
+                                    shapeAreaToRectAreaRatioLowTh="0.2"
+                                    shapeHeightToRectHeightRatioHighTh="0.45"
+                                    shapeHeightToRectHeightRatioLowTh="0.35"
+                                    shapeWidthToRectWidthRatioHighTh="0.5"
+                                    shapeWidthToRectWidthRatioLowTh="0.35"/>
+        <FernPathConfidence enableFernPathConfidence="false"
+                            failFrameThreshold="4"
+                            preventUpdateThreshold="8"/>
+ <!-- The b offsets are deltas from the constant term in each classifier in the DAT files. If an offset value is 0, the original bias is taken -->
+      <!-- reject_p is the positive landmark probability, when getting value that is lower than that then fail the frame -->
+      <ImageBasedConfidence
+        enableImageBasedConfidence = "true"
+        upperNoseLM    = "26"
+        lowerNoseLM    = "29"
+        landmarkNum    = "29"
+        patchSize      = "25,20,21,20"
+        hogBins        = "8"
+        frontalAngle   = "20"
+        numPoseClasses = "9"
+        b1_offset      = "0.0"
+        b2_offset      = "0.0"
+        b3_offset      = "0.0"
+        b4_offset      = "0.0"
+        b5_offset      = "0.0"
+        b6_offset      = "0.0"
+        b7_offset      = "0.0"
+        b8_offset      = "0.0"
+        b9_offset      = "0.0"
+        maxMovement    = "23"
+        rejectP        = "0.4" 
+        />
+      </Confidence>
+      <!-- When set to true, the buffer provided to the Fern algorithm is cropped using distance to the nose, rather than distance between the eyes. -->
+      <RoiCroppingMethod UseNoseCropping="true"
+                         dEyesTodNoseRatio="0.73"/>
+      <FernBinPathStats nSmallPathValueThresh="150"/>
+    </Esr>
+    <Sdm>
+      <Environment relativeDir="landmarks/Sdm/FullFace_78"/>
+      <Processor enableBlackening="true"
+                 enableRectMotion="true">
+        <RectMotion minMotionToApply="8"/>
+        <Blackening dilationKernelSize="5"
+                    enableDialation="true"
+                    useDepth="true"/>
+        <DepthProcessor enableAveraging="true"
+                        enableCompleteMissingLMDepth="true"
+                        meanHalf="2"
+                        minHasDepthThreshold="1"/>
+        <Descriptor>
+          <Hog cellSize="8"
+               halfMargin="1"
+               numberOfBins="8"
+               patchHeight="35"
+               patchWidth="35"/>
+          <Sift numCells="3"
+                gaussKernelSigma="0.7"
+                gaussKernelSize="3"                
+                numberOfBins="8"
+                gradientPatchSize="15"/>
+          <Surf cellSize="4"
+                halfMargin="3"
+                numberOfBins="8"
+                patchWidth="32"/>
+        </Descriptor>
+        <Cropper cropHeight="240"
+                 cropWidth="240">
+          <FaceCenter>
+            <FullFace isNoseBased="true"
+                      noseToEyesRatio="0.73"/>
+            <HalfFace>
+              <HalfFaceRight leftWeight="0.25"
+                             rightWeight="0.75"/>
+              <HalfFaceLeft leftWeight="0.75"
+                            rightWeight="0.25"/>
+            </HalfFace>
+          </FaceCenter>
+        </Cropper>
+      </Processor>
+      <Confidence enableConfidence="true">
+        <TemporalConfidence enableTemporalConfidence="false"
+                            maxRectMotionDx="10"
+                            maxRectMotionDy="7"
+                            minTemporalAlpha="0.03"
+                            temporalRate="0.4"
+                            temporalSigma="15"/>
+        <OutOfFovConfidence enableOutOfFovConfidence="false"/>
+        <LandmarksAlertsConfidence enableLandmarksAlertsConfidence="false"/>
+        <ShapeNormalizedEyesConfidence enableNormalizedEyesConfidence="false"
+                                       lowerThreshold="0.75"
+                                       upperThresholdBias="1.2"
+                                       upperThresholdSlope="0.015"/>
+        <ShapeAspectRatioConfidence aspectRatioHigh="1.8"
+                                    aspectRatioLow="0.71"
+                                    enableShapeAspectRatioConfidence="true"
+                                    maximalPitch="25"
+                                    minimalPitch="-7"
+                                    skewLimit="0.35"/>
+        <ShapeBoundingBoxConfidence depthScaleRatioLowerBound="0.7"
+                                   depthScaleRatioUpperBound="1.4"
+                                   enableShapeBoundingBoxConfidence="true"
+                                   maximalPitch="25"
+                                   minimalPitch="-7"
+                                   shapeAreaToRectAreaRatioHighTh="0.37"
+                                   shapeAreaToRectAreaRatioLowTh="0.25"
+                                   shapeHeightToRectHeightRatioHighTh="0.45"
+                                   shapeHeightToRectHeightRatioLowTh="0.35"
+                                   shapeWidthToRectWidthRatioHighTh="0.5"
+                                   shapeWidthToRectWidthRatioLowTh="0.35"/>
+				    <!-- The b offsets are deltas from the constant term in each classifier in the DAT files. If an offset value is 0, the original bias is taken -->
+      <!-- reject_p is the positive landmark probability, when getting value that is lower than that then fail the frame -->
+      <ImageBasedConfidence
+        enableImageBasedConfidence = "false"
+        upperNoseLM    = "26"
+        lowerNoseLM    = "29"
+        landmarkNum    = "29"
+        patchSize      = "25,20,21,20"
+        hogBins        = "8"
+        frontalAngle   = "20"
+        numPoseClasses = "9"
+        b1_offset      = "0.0"
+        b2_offset      = "0.0"
+        b3_offset      = "0.0"
+        b4_offset      = "0.0"
+        b5_offset      = "0.0"
+        b6_offset      = "0.0"
+        b7_offset      = "0.0"
+        b8_offset      = "0.0"
+        b9_offset      = "0.0"
+        maxMovement    = "23"
+        rejectP        = "0.4" 
+        />
+      </Confidence>
+    </Sdm>
+    <Csdm modelFileDir=""
+          modelFileName="ilc_78pnts_fast.bmd"/>
+  </Landmarks>
+
+  <Gaze>
+  <!-- 1-Shift-Scale, 2-Shift-Shift-Scale (taking into consideration head yaw/pitch in calibration) -->
+  <ShiftScaleMethod value="1"/>
+  <!-- 1-Basic (don't change), 4-OneAlphaToRatio (temporarily unsupported) -->
+  <MethodForYaw value ="1"/>
+  <!-- 3-SideReferences (don't change) -->
+  <MethodForPitch value="3"/>
+  <!-- 1-JustGaze, 2-BothGazePose, 3-JustPose  -->
+  <GazePoseMode value="2"/>
+  <!-- 1-Head-Center from Pose, 2-Pupil, 3-NoseTop  -->
+  <GazeOrigin value="2"/>
+  <!-- calibration delay in  frames from  streaming being  -->
+  <StartDelay value="1" />
+  <!-- number of calibration points -->
+  <CalibPoints value="6"/> 
+  <!-- stimulus duration (seconds) -->
+  <SecondsInOnePoint value="2"/>
+  <!-- 0-Right, 1-Left, 2-Both (currently unsupported) -->
+  <DominantEye value="0" />
+  <!-- distance of the camera from screen top (mm). **10 for built-in cameras**, 30 otherwise -->
+  <ScreenTopDist value="10" />
+  <!-- 0-No, 1-Write to files  -->
+  <DebugFiles value="0" />
+  <DebugPath value="c:\temp" />
+  </Gaze>
+
+  <Pose>
+
+    <General
+      HeadModelPath = "pose\headmodel.bin"
+    />
+
+    <PoseFrom2DLM>
+      <Solver
+        Type = "NonRigidOrthographic"
+        PerspectiveCompensation = "true"
+        ModesToUse = "1, 2"
+        NonRigidIterations = "5"
+        ProjectiveMaxIter = "15"
+      />  <!-- Solver types: Orthographic, Projective, NonRigidOrthographic -->
+          <!-- Modes to use: either an index list "1, 2, ...", an empty string, or the string "all" -->
+    </PoseFrom2DLM>
+
+    <PoseFrom3DLM>
+      <Solver
+        Type = "Classic"
+        NonRigidIterations = "5"
+        ModesToUse = "1, 2"
+      />  <!-- Solver types: Classic, Rigid, NonRigid -->
+          <!-- Modes to use: either an index list "1, 2, ...", an empty string, or the string "all" -->
+    </PoseFrom3DLM>
+
+    <PoseFromTrackingLM>
+      <thresholds
+        yaw = "30"
+        pitch = "30"
+        roll = "30"/>
+      <options
+        min_features = "15"
+        max_features = "1000"
+        max_iterations = "30"
+        smoothing = "true"
+        use_heuristics = "true"
+        estimate_nosetip = "false"
+        reset_mode = "nose"
+        smooth_reset_thresh = "25.0"
+      /> <!-- reset_mode: none, opencv, nose -->
+      <opencv_test
+        face_xml_path ="pose\haarcascade_frontalface_alt.xml"
+        eye_xml_path="pose\haarcascade_eye_tree_eyeglasses.xml"
+        frames_between_fd = "3"
+        scale = "2.0"/>
+      <nose_test
+        max_nose_dist_factor = "0.1"
+        nose_dist_to_center_thresh = "0.2"
+        full_reset_angle_thresh = "20"/>
+    </PoseFromTrackingLM>
+
+    <NoseRegression>
+      <data_file
+        path = "pose/nosedata"
+        name = "nose21_graydepth.dat"/>
+      <options
+        use_mirroring = "false"
+        max_iterations = "0"
+        use_intrinsics = "true"/> <!--max_iterations - Regression iterations, 0 for unlimited (4000) -->
+      <clustering
+        mode = "errortarg"
+        cluster_num = "4"
+        target_err = "1.0"/> <!-- mode: fixednum, errortarg -->
+      <confidence
+        max_error = "3"
+        min_ratio = "2.5"
+        min_size = "0.6"/>
+      <preprocess
+        inc_factor = "1.5"
+        scale_size = "120"
+        use_gradients = "false"
+        histeq = "true"
+        depthcliprange = "50"
+        depthmean = "500"/>
+      <initialization
+        num_inits = "32"
+        margin_x = "0.16667"
+        margin_y = "0.16667"
+        random_init_fraction = "1.0"/>
+    </NoseRegression>
+
+    <RGBPose>
+    </RGBPose>
+  </Pose>
+  
+
+  <Recognition
+    FaceDepthThreshold ="1500"
+    DefaultMinConsecutiveFramesForRecog="6">
+    <Ilc
+      RectangleSizeThreshold = "50"
+      RecognitionThreshold = "0"
+      RectangleMatchThreshold ="5"
+      RecognizerAlgo="CNN"> <!-- CNN, GRF-->
+    </Ilc>
+  </Recognition>
+
+  <Expressions>
+    <Expressions3D smileAlgo = "SmileAlgo2D" mouthOpen = "MouthOpen3D" kissAlgo = "Kiss3D" browMovementAlgo = "BrowMovement3D" eyesClosedAlgo = "EyesClosed3D"
+                   tongueOut = "TongueOut3D" eyeMovementAlgo="EyeMovementFromGaze" poseMovementAlgo= "PoseMovement" puff = "Puff3D"/>
+    <Expressions2D smileAlgo = "SmileAlgo2D" mouthOpen = "MouthOpen" kissAlgo = "Kiss2D" browMovementAlgo = "BrowMovement2D" eyesClosedAlgo = "EyesClosed2D"
+                   tongueOut = "TongueOut2D" eyeMovementAlgo="EyeMovementFromGaze" poseMovementAlgo= "PoseMovement" puff = "Puff2D"/>
+    <EyesMovement
+      eyeBorderWidth = "4"
+      eyeMinWindowSize ="4"
+      eyePupilGainX = "1.0"
+      eyePupilGainY = "1.0"/>
+    <EyesMovementFromGaze
+      eyeRefPoint = "1"/>    <!--values: 1- Relative to screen, 2- Relative to person -->
+    <PoseMovement
+      pitchThreshold = "10"
+      yawThreshold = "10"
+      rollThreshold ="10"/>
+    <BrowMovement
+      raiseThreshold = "30"
+      lowerThreshold = "20"/>
+    <BrowMovement2D
+      raiseThreshold = "30"
+      lowerThreshold = "20"/>
+    <TongueOut3D
+      updateSpeed = "100"/>
+    <Puff3D
+      UseSymmetricPuff="false"
+      updateSpeed = "50"/>
+    <Smile />
+    <MouthOpen />
+    <MouthOpen3D
+      MinDist = "6.5"/>
+  </Expressions>
+  
+  <PulseEstimator>
+      <RequiredFPS value="12" /> <!-- 15 fps as minimum FPS for pulse estimation, otherwise won't work -->
+      <MaxWindowSize value="90" /> <!-- minimum window size is 90 -->
+      <FirstWindowSize value="40" /> <!--find maximum within first 45 signal points (fine-tuning) -->
+      <FrequencyResolution value="0.06" /> <!-- freqency fitting resolution. could chanage to .01 for finer resolution -->
+      <LowerLimitHz value="0.85" /> <!-- current min HR: 51   -->
+      <UpperLimitHz value="2.2" /> <!-- current max HR: 132 -->
+      <HardLowerLimHz value="0.85" /> <!-- hard min HR: 51 (estimation lower bound) -->
+      <HardUpperLimHz value="2.2" /> <!-- hard max HR: 132 (estimation upper bound) -->
+      <DCSmoothness value="0.75" /> <!-- 0 ~ 1.0: larger the smoother DC (fine-tuning) -->
+      <FinalSmoothness value="0.55" /> <!-- 0 ~ 1.0: smoothing after high pass filter (fine-tuning) -->
+      <ResidualThreshold value=".01" /> <!-- residual thresold for controlling quality (fine-tuning) -->
+      <MaxSignalSize value="1800" /> <!-- ==30*60, 30 samples per second (fine-tuning) -->
+      <SignalAmpThreshold value=".05" /> <!-- maximum human skin fluctuation (fine-tuning) -->
+      <MinSignalAmpThreshold value=".005" /> <!-- minimum human skin fluctuation (fine-tuning) -->
+      <DiplayDCSmoothness value="0.75" />. <!-- 0 ~ 1.0: for smoother DC, it can be used as respiration waveform -->
+      <DiplayACSmoothness value="0.5" /> <!-- 0 ~ 1.0: for smoother AC, it makes waveform cleaner -->
+      <EstimationIteration value="4" /> <!-- multiple estimation in current max window -->
+      <ResidualSmoothness value="0.2" /> <!-- smooth out residual series to have a better min -->
+      <EnableMotionThreshold value="0" /> <!-- enable motion (signal SD) threshold, 0 is more strict -->
+      <EnableResidualThreshold value="0" /> <!-- enable residual threshold, 0 is more strict -->
+      <EstimateEveryNFrame value="22" /> <!-- execute estimation in every n frame -->
+      <EaseFaceRect value=".75" /> <!-- 0~1.0: ease face rect for stablizing PPG waveform. larger the smoother -->
+      <FixRectMovementThresold value="30" /> <!-- in sq pixel as minimum distance for fixing face rectangle-->
+      <FreeRectMovementThresold value="100" /> <!-- in sq pixel as minimum distance for free face rectangle-->
+      <tolerateMultiplier value="10.0" /> <!-- 1: same. tolerate ?x to existing thresold for returning a HR-->
+      <EaseRawHR value=".75" /> <!-- 0~1.0: ease between measurement HR. larger the smoother -->
+      <MaxDeviationLimit value=".2" /> <!-- trim outliers within this deviation  -->
+      <MinimumFaceROI value="90" /> <!-- minimum face ROI 135x135, enable long-distance to 90x90 for face pixels -->
+  </PulseEstimator>
+
+  <PupilDistance>
+    <ConfidenceParameters
+      minimalPitch ="-20"
+      maximalPitch ="20"
+      minimalYaw ="-10"
+      maximalYaw ="10"
+      minimalRoll ="-10"
+      maximalRoll ="10"
+      maximalDepth ="700"/>
+    <MaskParameters
+      circleRadius = "9"
+      circleCenter = "15"
+      maskWidth = "2"
+      maskWiderWidth = "3"/>
+    <EyesRectParameters
+      xOffset = "2"
+      yOffset ="2"
+      whOffset = "6"/>
+    <EyesRectNormalizationParameters
+      heightScale = "35"
+      widthScale = "140"/>
+    <GeneralParameters
+      numIterationsForAvg = "10"
+      numCentroids = "5"/>
+  </PupilDistance>
+  
+</Algos>
