@@ -1,2 +1,2 @@
 * text=auto eol=lf encoding=utf-8
-*.bin filter=lfs diff=lfs merge=lfs -text
+Assets/RSSDK/Plugins/runtime/face/data/face/landmarks/Esr/HighQuality/FLD_S_delta*.bin filter=lfs diff=lfs merge=lfs -text
