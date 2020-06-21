@@ -16,7 +16,25 @@ internal class Building
     static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
     {
         var directoryPath = Path.GetDirectoryName(pathToBuiltProject);
+        AddLicenseFile(directoryPath);
         RemoveUnnecessaryFiles(directoryPath);
+    }
+
+    /// <summary>
+    /// ビルド先へライセンスファイルを追加
+    /// </summary>
+    static void AddLicenseFile(string directoryPath)
+    {
+        var filePath = Path.Combine(Application.dataPath, "RSSDK/Plugins/runtime/Intel RealSense SDK RT EULA.rtf");
+        File.Copy(
+            filePath,
+            Path.Combine(
+                Path.GetDirectoryName(
+                    Directory.EnumerateDirectories(directoryPath, "runtime", SearchOption.AllDirectories).First()
+                ),
+                Path.GetFileName(filePath)
+            )
+        );
     }
 
     /// <summary>
