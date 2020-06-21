@@ -5,7 +5,7 @@ using UnityEditor;
 internal class Building
 {
     [InitializeOnLoadMethod]
-    private static void SetRuntimePath()
+    static void SetRuntimePath()
     {
         RSPostBuildProcessor.SpecifiedRuntimePath = Path.Combine(Application.dataPath, "RSSDK");
     }
