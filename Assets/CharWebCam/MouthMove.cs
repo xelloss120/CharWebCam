@@ -12,7 +12,7 @@ public class MouthMove : MonoBehaviour
     // 平滑化
     protected Smoother1D SmoothMouth;
     Smoother Smoother;
-    Session Session;
+    SenseManager SenseManager;
 
     /// <summary>
     /// 音声入力デバイス選択待機
@@ -23,8 +23,8 @@ public class MouthMove : MonoBehaviour
 
         // 平滑化初期化
         // 参考：https://software.intel.com/sites/landingpage/realsense/camera-sdk/v2016r3/documentation/html/index.html?doc_utils_the_smoother_utility.html
-        Session = Session.CreateInstance();
-        Smoother = Smoother.CreateInstance(Session);
+        SenseManager = SenseManager.CreateInstance();
+        Smoother = Smoother.CreateInstance(SenseManager.Session);
         SmoothMouth = Smoother.Create1DWeighted(5);
     }
 
