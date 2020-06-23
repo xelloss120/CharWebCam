@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class RealSense : MonoBehaviour
 {
     public Text ErrorLog;
     public Text DetectedValue;
-    public Material Material;
+    public RawImage RawImage;
 
     // キャラクター制御パラメーター
     protected Vector3 BodyPos;
@@ -89,18 +90,23 @@ public class RealSense : MonoBehaviour
             FaceConfig.Expressions.Properties.Enabled = true;
             FaceConfig.ApplyChanges();
 
-            SampleReader = SampleReader.Activate(SenseManager);
-            SampleReader.EnableStream(StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
-            SampleReader.SampleArrived += SampleReader_SampleArrived;
+            // RawStreams
+            if (CommandLineArgs.DisplayRawCameraImage)
+            {
+                RawImage.gameObject.SetActive(true);
+
+                SampleReader = SampleReader.Activate(SenseManager);
+                SampleReader.EnableStream(StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
+                SampleReader.SampleArrived += SampleReader_SampleArrived;
+
+                Texture = NativeTexturePlugin.Activate();
+                RawImage.material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
+                RawImage.material.mainTextureScale = new Vector2(-1, -1);
+                TexPtr = RawImage.material.mainTexture.GetNativeTexturePtr();
+            }
 
             SenseManager.Init();
             SenseManager.StreamFrames(false);
-
-            // RawStreams
-            Texture = NativeTexturePlugin.Activate();
-            Material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
-            Material.mainTextureScale = new Vector2(-1, -1);
-            TexPtr = Material.mainTexture.GetNativeTexturePtr();
 
             // 解像度取得
             StreamProfileSet profile;

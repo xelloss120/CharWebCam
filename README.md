@@ -24,6 +24,9 @@ Intelの第4世代以降のCPU
 - `CharWebCam.exe "--audio-input-device=マイク (Realtek Audio)"`
 	+ 「マイク (Realtek Audio)」を選択します。
 
+#### `--display-raw-camera-image`
+ウィンドウ右下へ、カメラの映像をそのまま表示します。
+
 ## 注意
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**
