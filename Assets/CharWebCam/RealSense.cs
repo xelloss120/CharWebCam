@@ -9,6 +9,7 @@ using Intel.RealSense.Utility;
 
 public class RealSense : MonoBehaviour
 {
+    public Canvas Canvas;
     public Text ErrorLog;
     public Text DetectedValue;
     public RawImage RawImage;
@@ -91,7 +92,7 @@ public class RealSense : MonoBehaviour
             FaceConfig.ApplyChanges();
 
             // RawStreams
-            if (CommandLineArgs.DisplayRawCameraImage)
+            if (!CommandLineArgs.HideTextDefault && CommandLineArgs.DisplayRawCameraImage)
             {
                 RawImage.gameObject.SetActive(true);
 
@@ -127,6 +128,12 @@ public class RealSense : MonoBehaviour
             SmoothKiss = Smoother.Create1DWeighted(FaceSmoothWeight);
             SmoothMouth = Smoother.Create1DWeighted(FaceSmoothWeight);
             SmoothTongue = Smoother.Create1DWeighted(FaceSmoothWeight);
+
+            // 検出値等をデフォルトで非表示に
+            if (CommandLineArgs.HideTextDefault)
+            {
+                Canvas.gameObject.SetActive(false);
+            }
         }
         catch (Exception e)
         {

@@ -9228,6 +9228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784f9e20e1ef5f243b8d3d8a0bedf7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 395924532}
   ErrorLog: {fileID: 1527425070}
   DetectedValue: {fileID: 1475280404}
   RawImage: {fileID: 59083439}

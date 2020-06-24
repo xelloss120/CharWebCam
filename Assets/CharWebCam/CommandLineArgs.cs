@@ -9,6 +9,7 @@ public static class CommandLineArgs
 {
     public static readonly string AudioInputDevice;
     public static readonly bool DisplayRawCameraImage;
+    public static readonly bool HideTextDefault;
 
     static readonly IEnumerable<string> Args = Environment.GetCommandLineArgs().Skip(1);
 
@@ -16,6 +17,7 @@ public static class CommandLineArgs
     {
         AudioInputDevice = GetMicrophone();
         DisplayRawCameraImage = Args.Contains("--display-raw-camera-image");
+        HideTextDefault = Args.Contains("--hide-text-default");
     }
 
     /// <summary>

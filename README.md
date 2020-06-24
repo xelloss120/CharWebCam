@@ -27,6 +27,11 @@ Intelの第4世代以降のCPU
 #### `--display-raw-camera-image`
 ウィンドウ右下へ、カメラの映像をそのまま表示します。
 
+#### `--hide-text-default`
+ウィンドウ内のテキストをデフォルトで非表示にします。  
+`--audio-input-device` の指定がない場合は、マイク入力なしとなります。  
+この指定を行うと、`--display-raw-camera-image` は無視されます。
+
 ## 注意
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**

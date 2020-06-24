@@ -43,6 +43,10 @@ public class MouthMove : MonoBehaviour
                 DeviceName = null;
             }
         }
+        else if (CommandLineArgs.HideTextDefault)
+        {
+            return;
+        }
 
         if (DeviceName == null)
         {
