@@ -1,4 +1,6 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Intel.RealSense;
@@ -8,11 +10,18 @@ public class MouthMove : MonoBehaviour
 {
     // 音声入力デバイス選択表示
     public Text Text;
+    string DeviceName;
 
     // 平滑化
     protected Smoother1D SmoothMouth;
     Smoother Smoother;
     SenseManager SenseManager;
+
+    // 不具合対策
+    readonly TimeSpan PositionStopLimit = TimeSpan.FromSeconds(1);
+    readonly TimeSpan PositionMonitoringInterval = TimeSpan.FromSeconds(0.05f);
+    DateTimeOffset? PositionNotMovedStart;
+    int PreviousPosition;
 
     /// <summary>
     /// 音声入力デバイス選択待機
@@ -26,6 +35,8 @@ public class MouthMove : MonoBehaviour
         SenseManager = SenseManager.CreateInstance();
         Smoother = Smoother.CreateInstance(SenseManager.Session);
         SmoothMouth = Smoother.Create1DWeighted(5);
+
+        MonitorMicrophone();
     }
 
     /// <summary>
@@ -54,13 +65,22 @@ public class MouthMove : MonoBehaviour
                 if (Input.GetKey(KeyCode.Alpha0 + i))
                 {
                     // 録音開始
-                    AudioSource audio = GetComponent<AudioSource>();
-                    audio.clip = Microphone.Start(Microphone.devices[i], true, 10, 44100);
+                    DeviceName = Microphone.devices[i];
+                    StartRecording();
                     Text.text = "";
                 }
             }
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// 録音開始
+    /// </summary>
+    void StartRecording()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = Microphone.Start(DeviceName, true, 10, 44100);
     }
 
     /// <summary>
@@ -91,5 +111,36 @@ public class MouthMove : MonoBehaviour
         audio.clip.SetData(samples, 0);
 
         return vol;
+    }
+
+    /// <summary>
+    /// デバイスが変化するとマイク入力が取れなくなるUnityの不具合を回避
+    /// </summary>
+    async void MonitorMicrophone()
+    {
+        while (true)
+        {
+            var position = Microphone.GetPosition(DeviceName);
+
+            if (position == PreviousPosition)
+            {
+                if (PositionNotMovedStart == null)
+                {
+                    PositionNotMovedStart = DateTimeOffset.Now;
+                }
+                else if (DateTimeOffset.Now - PositionNotMovedStart > PositionStopLimit)
+                {
+                    PositionNotMovedStart = null;
+                    StartRecording();
+                }
+            }
+            else
+            {
+                PositionNotMovedStart = null;
+                PreviousPosition = position;
+            }
+
+            await Task.Delay(PositionMonitoringInterval);
+        }
     }
 }
