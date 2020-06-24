@@ -14,6 +14,16 @@ Intelの第4世代以降のCPU
 動画制作や配信等でクロマキー合成してお使いください。  
 調整や拡張はご自由に行ってください。
 
+### コマンドライン引数
+#### `--audio-input-device`
+起動時のマイクの選択を省略します。
+
+##### 例
+- `CharWebCam.exe --audio-input-device`
+	+ 既定のデバイスを選択します。 
+- `CharWebCam.exe "--audio-input-device=マイク (Realtek Audio)"`
+	+ 「マイク (Realtek Audio)」を選択します。
+
 ## 注意
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**
