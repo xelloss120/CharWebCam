@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -28,7 +29,29 @@ public class MouthMove : MonoBehaviour
     /// </summary>
     protected void Init()
     {
-        StartCoroutine("SelectMicrophone");
+        // コマンドライン引数
+        DeviceName = CommandLineArgs.AudioInputDevice;
+        if (DeviceName != null)
+        {
+            if (DeviceName == "" || Microphone.devices.Contains(DeviceName))
+            {
+                StartRecording();
+            }
+            else
+            {
+                Text.text += $"Device named “{DeviceName}” do not exists.\n\n";
+                DeviceName = null;
+            }
+        }
+        else if (CommandLineArgs.HideTextDefault)
+        {
+            return;
+        }
+
+        if (DeviceName == null)
+        {
+            StartCoroutine("SelectMicrophone");
+        }
 
         // 平滑化初期化
         // 参考：https://software.intel.com/sites/landingpage/realsense/camera-sdk/v2016r3/documentation/html/index.html?doc_utils_the_smoother_utility.html
@@ -50,7 +73,7 @@ public class MouthMove : MonoBehaviour
     IEnumerator SelectMicrophone()
     {
         // 一覧表示
-        Text.text = "Device to move mouth.\n\n";
+        Text.text += "Device to move mouth.\n\n";
         for (int i = 0; i < Microphone.devices.Length; i++)
         {
             Text.text += "[" + i + "]" + Microphone.devices[i] + "\n";
