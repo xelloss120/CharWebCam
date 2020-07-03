@@ -23,7 +23,27 @@ public class UI : MonoBehaviour
 
     async void Start()
     {
-        var avatar = await Load(GetDefaultModelPath());
+        GameObject avatar = null;
+        if (!string.IsNullOrWhiteSpace(CommandLineArgs.VRM))
+        {
+            try
+            {
+                avatar = await Load(CommandLineArgs.VRM);
+            }
+            catch (Exception exception)
+            {
+                Text.text += "Failed to load the specified VRM file.\n"
+                    + $"Path: {CommandLineArgs.VRM}\n"
+                    + $"Error message:\n{exception.Message}\n"
+                    + "\n";
+            }
+        }
+
+        if (avatar == null)
+        {
+            avatar = await Load(GetDefaultModelPath());
+        }
+
         avatar.AddComponent<RS_VRM>().UI = this;
         StartCoroutine("GetKeyEsc");
     }

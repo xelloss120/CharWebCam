@@ -132,7 +132,7 @@ public class RealSense : MonoBehaviour
         }
         catch (Exception e)
         {
-            UI.Text.text = "RealSense Error\n";
+            UI.Text.text += "RealSense Error\n";
             UI.Text.text += e.Message;
         }
     }

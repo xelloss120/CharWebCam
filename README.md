@@ -1,8 +1,9 @@
 # CharWebCam
 普通のWebCamで3Dキャラクター(Unityちゃん)を動かすよ！
 
+VRMファイルがあれば、Unityちゃんの代わりに好きなアバターを動かすこともできます。
+
 ## 動かすのに必要なもの
-Unity 2019.4  
 Intelの第4世代以降のCPU
 
 ## できること
@@ -26,6 +27,12 @@ Intelの第4世代以降のCPU
 ※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
 
 ### コマンドライン引数
+#### `--vrm`
+読み込むVRMファイルを絶対パスで指定します。
+
+##### 例
+- `CharWebCam.exe "--vrm=C:\Users\charwebcam\Documents\unitychan (custom).vrm"`
+
 #### `--audio-input-device`
 起動時のマイクの選択を省略します。
 
