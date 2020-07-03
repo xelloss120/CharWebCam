@@ -37,6 +37,12 @@ internal class Building
                 Path.GetFileName(filePath)
             )
         );
+
+        File.WriteAllLines(Path.Combine(directoryPath, "Licenses.url"), new[]
+        {
+            "[InternetShortcut]",
+            "URL=https://github.com/xelloss120/CharWebCam#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9",
+        });
     }
 
     /// <summary>

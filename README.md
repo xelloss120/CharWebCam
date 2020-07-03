@@ -55,9 +55,23 @@ Intelの第4世代以降のCPU
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**
 
 ## ライセンス
-RealSenseSDK：使用バージョンに準拠  
-ユニティちゃん：© Unity Technologies Japan/UCL  
-その他(120作成部分)：MIT
+MIT  
+Copyright (c) 2020 120  
+※以下の部分を除く
+
+### Packages/VRM<br>Packages/VRM Shaders
+MIT
+Copyright (c) 2020 VRM Consortium
+Copyright (c) 2018 Masataka SUMI for MToon  
+https://github.com/vrm-c/UniVRM/blob/v0.56.0/LICENSE.txt
+
+### Assets/RSSDK
+Intel RealSense SDK License October 2015 Version  
+https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
+
+### DefaultModel/unitychan.vrm<br>Assets/UnityChan/WAIT00.anim
+© Unity Technologies Japan/UCL  
+https://unity-chan.com/contents/guideline/
 
 ## 免責
 ご利用は自己責任で！！  
