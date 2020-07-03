@@ -2,17 +2,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Intel.RealSense;
 using Intel.RealSense.Face;
 using Intel.RealSense.Utility;
 
 public class RealSense : MonoBehaviour
 {
-    public Canvas Canvas;
-    public Text ErrorLog;
-    public Text DetectedValue;
-    public RawImage RawImage;
+    protected UI UI;
 
     // キャラクター制御パラメーター
     protected Vector3 BodyPos;
@@ -94,16 +90,16 @@ public class RealSense : MonoBehaviour
             // RawStreams
             if (!CommandLineArgs.HideTextDefault && CommandLineArgs.DisplayRawCameraImage)
             {
-                RawImage.gameObject.SetActive(true);
+                UI.RawImage.gameObject.SetActive(true);
 
                 SampleReader = SampleReader.Activate(SenseManager);
                 SampleReader.EnableStream(StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
                 SampleReader.SampleArrived += SampleReader_SampleArrived;
 
                 Texture = NativeTexturePlugin.Activate();
-                RawImage.material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
-                RawImage.material.mainTextureScale = new Vector2(-1, -1);
-                TexPtr = RawImage.material.mainTexture.GetNativeTexturePtr();
+                UI.RawImage.material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
+                UI.RawImage.material.mainTextureScale = new Vector2(-1, -1);
+                TexPtr = UI.RawImage.material.mainTexture.GetNativeTexturePtr();
             }
 
             SenseManager.Init();
@@ -132,13 +128,13 @@ public class RealSense : MonoBehaviour
             // 検出値等をデフォルトで非表示に
             if (CommandLineArgs.HideTextDefault)
             {
-                Canvas.gameObject.SetActive(false);
+                UI.gameObject.SetActive(false);
             }
         }
         catch (Exception e)
         {
-            ErrorLog.text = "RealSense Error\n";
-            ErrorLog.text += e.Message;
+            UI.Text.text = "RealSense Error\n";
+            UI.Text.text += e.Message;
         }
     }
 
@@ -221,7 +217,7 @@ public class RealSense : MonoBehaviour
         text += "Kiss : " + Kiss + "\n";
         text += "Mouth : " + Mouth + "\n";
         text += "Tongue : " + Tongue + "\n";
-        DetectedValue.text = text;
+        UI.DetectedValue.text = text;
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RS_UnityChan : RealSense
 {
@@ -13,6 +14,14 @@ public class RS_UnityChan : RealSense
 
     void Start()
     {
+        foreach (var obj in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            UI = obj.GetComponent<UI>();
+            if (UI)
+            {
+                break;
+            }
+        }
         Body.transform.position = new Vector3(0, -1.35f, 0.75f);
         Body.transform.localRotation = Quaternion.Euler(0, 180, 0);
         var animator = Body.GetComponent<Animator>();
@@ -22,7 +31,7 @@ public class RS_UnityChan : RealSense
         animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
         Body.AddComponent<AudioSource>();
         var mm = Body.AddComponent<MM_UnityChan>();
-        mm.Text = ErrorLog;
+        mm.Text = UI.Text;
         mm.Mouth = MTH_DEF;
 
         BodyPosYOffset = Body.transform.position.y;
