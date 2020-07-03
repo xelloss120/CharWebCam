@@ -14,6 +14,17 @@ Intelの第4世代以降のCPU
 動画制作や配信等でクロマキー合成してお使いください。  
 調整や拡張はご自由に行ってください。
 
+## 表情の対応関係
+
+| VRMBlendShape | フェイシャルキャプチャーで検出された表情 |
+|---------------|------------------------------------------|
+| Joy           | 笑顔                                     |
+| Angry         | キス                                     |
+| Sorrow        | 眉下                                     |
+| `Surprise`    | 眉上                                     |
+
+※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
+
 ### コマンドライン引数
 #### `--audio-input-device`
 起動時のマイクの選択を省略します。
@@ -35,16 +46,6 @@ Intelの第4世代以降のCPU
 ## 注意
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**
-
-## MMDモデル(pmx等)の対応について
-./CharWebCam/MMD_Sample/RS_Kotonoha.csと  
-./CharWebCam/MMD_Sample/MM_Kotonoha.csは  
-以下のMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
-http://www.nicovideo.jp/watch/sm24368983  
-別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
-
-参考
-http://qiita.com/Hv2RMjHzDyqXVIr/items/7e1aca3506a05aa20644
 
 ## ライセンス
 RealSenseSDK：使用バージョンに準拠  

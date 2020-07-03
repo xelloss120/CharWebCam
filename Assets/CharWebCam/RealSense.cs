@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Intel.RealSense;
@@ -8,7 +7,7 @@ using Intel.RealSense.Utility;
 
 public class RealSense : MonoBehaviour
 {
-    protected UI UI;
+    public UI UI;
 
     // キャラクター制御パラメーター
     protected Vector3 BodyPos;
