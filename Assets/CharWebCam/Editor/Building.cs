@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
@@ -18,6 +19,7 @@ internal class Building
         var directoryPath = Path.GetDirectoryName(pathToBuiltProject);
         AddLicenseFile(directoryPath);
         RemoveUnnecessaryFiles(directoryPath);
+        AddDefaultModel(directoryPath);
     }
 
     /// <summary>
@@ -35,6 +37,12 @@ internal class Building
                 Path.GetFileName(filePath)
             )
         );
+
+        File.WriteAllLines(Path.Combine(directoryPath, "Licenses.url"), new[]
+        {
+            "[InternetShortcut]",
+            "URL=https://github.com/xelloss120/CharWebCam#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9",
+        });
     }
 
     /// <summary>
@@ -61,6 +69,35 @@ internal class Building
         foreach (var path in Directory.GetFiles(directoryPath, "*.meta", SearchOption.AllDirectories))
         {
             File.Delete(path);
+        }
+    }
+
+    /// <summary>
+    /// VRMファイルを同梱する
+    /// </summary>
+    static void AddDefaultModel(string directoryPath)
+    {
+        var source = new DirectoryInfo(RuntimeVRMLoader.GetDefaultModelPath()).Parent;
+        CopyDirectoryRecursively(source, Path.Combine(directoryPath, source.Name));
+    }
+
+    /// <summary>
+    /// ディレクトリを再帰的にコピーする
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="destination"></param>
+    static void CopyDirectoryRecursively(DirectoryInfo source, string destination)
+    {
+        Directory.CreateDirectory(destination);
+
+        foreach (var sourceSubDirectory in source.GetDirectories())
+        {
+            CopyDirectoryRecursively(sourceSubDirectory, Path.Combine(destination, sourceSubDirectory.Name));
+        }
+
+        foreach (var sourceFile in source.GetFiles())
+        {
+            sourceFile.CopyTo(Path.Combine(destination, sourceFile.Name), overwrite: true);
         }
     }
 }

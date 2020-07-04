@@ -1,8 +1,9 @@
 # CharWebCam
 普通のWebCamで3Dキャラクター(Unityちゃん)を動かすよ！
 
+VRMファイルがあれば、Unityちゃんの代わりに好きなアバターを動かすこともできます。
+
 ## 動かすのに必要なもの
-Unity 2019.4  
 Intelの第4世代以降のCPU
 
 ## できること
@@ -14,7 +15,24 @@ Intelの第4世代以降のCPU
 動画制作や配信等でクロマキー合成してお使いください。  
 調整や拡張はご自由に行ってください。
 
+## 表情の対応関係
+
+| VRMBlendShape | フェイシャルキャプチャーで検出された表情 |
+|---------------|------------------------------------------|
+| Joy           | 笑顔                                     |
+| Angry         | キス                                     |
+| Sorrow        | 眉下                                     |
+| `Surprise`    | 眉上                                     |
+
+※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
+
 ### コマンドライン引数
+#### `--vrm`
+読み込むVRMファイルを絶対パスで指定します。
+
+##### 例
+- `CharWebCam.exe "--vrm=C:\Users\charwebcam\Documents\unitychan (custom).vrm"`
+
 #### `--audio-input-device`
 起動時のマイクの選択を省略します。
 
@@ -36,20 +54,34 @@ Intelの第4世代以降のCPU
 カメラの初期化はRealSenseSDK任せなので、認識させたいカメラのみPCに接続してください。  
 **※RealSenseSDKは、dllの絶対パスにASCII外の文字が含まれていると動作しません。絶対パスがASCIIのみで構成させている場所へUnityプロジェクトを置いてください。**
 
-## MMDモデル(pmx等)の対応について
-./CharWebCam/MMD_Sample/RS_Kotonoha.csと  
-./CharWebCam/MMD_Sample/MM_Kotonoha.csは  
-以下のMMDモデル向けですが、MMD4Mとモデルは規約に基づき同梱していません。  
-http://www.nicovideo.jp/watch/sm24368983  
-別途MMD4Mとモデルを追加した上で、Unityちゃんのシーンを元に作ってもらえればと思います。
-
-参考
-http://qiita.com/Hv2RMjHzDyqXVIr/items/7e1aca3506a05aa20644
-
 ## ライセンス
-RealSenseSDK：使用バージョンに準拠  
-ユニティちゃん：© Unity Technologies Japan/UCL  
-その他(120作成部分)：MIT
+MIT  
+Copyright (c) 2020 120  
+※以下の部分を除く
+
+### Packages/VRM<br>Packages/VRM Shaders
+MIT
+Copyright (c) 2020 VRM Consortium
+Copyright (c) 2018 Masataka SUMI for MToon  
+https://github.com/vrm-c/UniVRM/blob/v0.56.0/LICENSE.txt
+
+### Assets/VRMLoaderUI<br>Assets/StreamingAssets/VRMLoaderUI
+MIT  
+Copyright (c) 2018 m2wasabi  
+https://github.com/m2wasabi/VRMLoaderUI/blob/0.3/LICENSE
+
+### Assets/VRMViewer/Scripts/FileDialogForWindows.cs
+MIT
+Copyright (c) 2018 dwango
+https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
+
+### Assets/RSSDK
+Intel RealSense SDK License October 2015 Version  
+https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
+
+### DefaultModel/unitychan.vrm<br>Assets/UnityChan/WAIT00.anim
+© Unity Technologies Japan/UCL  
+https://unity-chan.com/contents/guideline/
 
 ## 免責
 ご利用は自己責任で！！  

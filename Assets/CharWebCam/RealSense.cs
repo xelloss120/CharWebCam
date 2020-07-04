@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Intel.RealSense;
 using Intel.RealSense.Face;
 using Intel.RealSense.Utility;
@@ -10,9 +8,6 @@ using Intel.RealSense.Utility;
 public class RealSense : MonoBehaviour
 {
     public Canvas Canvas;
-    public Text ErrorLog;
-    public Text DetectedValue;
-    public RawImage RawImage;
 
     // キャラクター制御パラメーター
     protected Vector3 BodyPos;
@@ -94,16 +89,16 @@ public class RealSense : MonoBehaviour
             // RawStreams
             if (!CommandLineArgs.HideTextDefault && CommandLineArgs.DisplayRawCameraImage)
             {
-                RawImage.gameObject.SetActive(true);
+                Canvas.RawImage.gameObject.SetActive(true);
 
                 SampleReader = SampleReader.Activate(SenseManager);
                 SampleReader.EnableStream(StreamType.STREAM_TYPE_COLOR, 640, 480, 30);
                 SampleReader.SampleArrived += SampleReader_SampleArrived;
 
                 Texture = NativeTexturePlugin.Activate();
-                RawImage.material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
-                RawImage.material.mainTextureScale = new Vector2(-1, -1);
-                TexPtr = RawImage.material.mainTexture.GetNativeTexturePtr();
+                Canvas.RawImage.material.mainTexture = new Texture2D(640, 480, TextureFormat.BGRA32, false);
+                Canvas.RawImage.material.mainTextureScale = new Vector2(-1, -1);
+                TexPtr = Canvas.RawImage.material.mainTexture.GetNativeTexturePtr();
             }
 
             SenseManager.Init();
@@ -137,8 +132,8 @@ public class RealSense : MonoBehaviour
         }
         catch (Exception e)
         {
-            ErrorLog.text = "RealSense Error\n";
-            ErrorLog.text += e.Message;
+            Canvas.Text.text += "RealSense Error\n";
+            Canvas.Text.text += e.Message;
         }
     }
 
@@ -221,7 +216,7 @@ public class RealSense : MonoBehaviour
         text += "Kiss : " + Kiss + "\n";
         text += "Mouth : " + Mouth + "\n";
         text += "Tongue : " + Tongue + "\n";
-        DetectedValue.text = text;
+        Canvas.DetectedValue.text = text;
     }
 
     /// <summary>
