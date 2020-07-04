@@ -6,3 +6,7 @@ guidelines = 120
 [*.cs]
 indent_size = 4
 indent_style = space
+
+[*.json]
+indent_size = 2
+indent_style = space
