@@ -65,6 +65,11 @@ Copyright (c) 2020 VRM Consortium
 Copyright (c) 2018 Masataka SUMI for MToon  
 https://github.com/vrm-c/UniVRM/blob/v0.56.0/LICENSE.txt
 
+### Assets/VRMLoaderUI<br>Assets/StreamingAssets/VRMLoaderUI
+MIT  
+Copyright (c) 2018 m2wasabi  
+https://github.com/m2wasabi/VRMLoaderUI/blob/0.3/LICENSE
+
 ### Assets/VRMViewer/Scripts/FileDialogForWindows.cs
 MIT
 Copyright (c) 2018 dwango
