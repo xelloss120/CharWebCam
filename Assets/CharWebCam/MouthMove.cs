@@ -120,6 +120,11 @@ public class MouthMove : MonoBehaviour
     {
         while (true)
         {
+            if (this == null)
+            {
+                return;
+            }
+
             var position = Microphone.GetPosition(DeviceName);
 
             if (position == PreviousPosition)
