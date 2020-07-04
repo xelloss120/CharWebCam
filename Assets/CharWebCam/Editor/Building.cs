@@ -77,7 +77,7 @@ internal class Building
     /// </summary>
     static void AddDefaultModel(string directoryPath)
     {
-        var source = new DirectoryInfo(UI.GetDefaultModelPath()).Parent;
+        var source = new DirectoryInfo(RuntimeVRMLoader.GetDefaultModelPath()).Parent;
         CopyDirectoryRecursively(source, Path.Combine(directoryPath, source.Name));
     }
 

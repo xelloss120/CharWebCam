@@ -77,7 +77,7 @@ public class RS_VRM : RealSense
     {
         gameObject.AddComponent<AudioSource>();
         var mm = gameObject.AddComponent<MM_VRM>();
-        mm.Text = UI.Text;
+        mm.Text = Canvas.Text;
     }
 
     void Update()
