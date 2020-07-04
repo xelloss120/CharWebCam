@@ -72,7 +72,7 @@ https://github.com/m2wasabi/VRMLoaderUI/blob/0.3/LICENSE
 
 ### Assets/VRMViewer/Scripts/FileDialogForWindows.cs
 MIT
-Copyright (c) 2018 dwango
+Copyright (c) 2018 dwango  
 https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
 
 ### Assets/RSSDK
