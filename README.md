@@ -88,11 +88,13 @@ https://unity-chan.com/contents/guideline/
 特にMMDモデルのご利用はMMD4Mの注意事項およびモデル付属の文書をよく読みましょう。  
 そして版権モデルの場合は版権元の規約も読みましょう。
 
-## 実行形式(exe)版
+## VRM版
 以下のページから「CharWebCam.zip」をダウンロード  
 https://github.com/xelloss120/CharWebCam/releases  
 **※保存先のパスに全角が混ざるとダメなので、半角英数記号のみで構成される保存先(パス)に置いて実行してください。**
 
-## プロ生ちゃんのVRM
-https://3d.nicovideo.jp/works/td37839  
-ダウンロードしてCharWebCamから読み込むと、プロ生ちゃんを動かせます。
+## 旧ユニティちゃん版
+https://1drv.ms/u/s!Ass7Jg1DXnrDlBoBFcokzBZX2Tm9  
+
+## 旧プロ生ちゃん版
+https://1drv.ms/u/s!Ass7Jg1DXnrDmR83V47_raOXKTUj  
