@@ -65,6 +65,11 @@ Copyright (c) 2020 VRM Consortium
 Copyright (c) 2018 Masataka SUMI for MToon  
 https://github.com/vrm-c/UniVRM/blob/v0.56.0/LICENSE.txt
 
+### Assets/VRMViewer/Scripts/FileDialogForWindows.cs
+MIT
+Copyright (c) 2018 dwango
+https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
+
 ### Assets/RSSDK
 Intel RealSense SDK License October 2015 Version  
 https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
