@@ -79,6 +79,18 @@ https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
 Intel RealSense SDK License October 2015 Version  
 https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
 
+### Assets/UnityCapture
+Zlib  
+Copyright (c) 2018 Bernhard Schelling / Feature contributors: Brandon J Matthews  
+Copyright (c) 2016 MHD Yamen Saraiji  
+https://github.com/schellingb/UnityCapture/tree/fe461e8f6e1cd1e6a0dfa9891147c8e393a20a2c#license
+
+### UnityCaptureFilter
+MIT  
+Copyright (c) 2018 Bernhard Schelling / Feature contributors: Brandon J Matthews  
+Copyright (c) 2016 MHD Yamen Saraiji  
+https://github.com/schellingb/UnityCapture/tree/fe461e8f6e1cd1e6a0dfa9891147c8e393a20a2c#license
+
 ### DefaultModel/unitychan.vrm<br>Assets/UnityChan/WAIT00.anim
 © Unity Technologies Japan/UCL  
 https://unity-chan.com/contents/guideline/
