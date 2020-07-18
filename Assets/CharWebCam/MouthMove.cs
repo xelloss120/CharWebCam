@@ -10,7 +10,6 @@ using Intel.RealSense.Utility;
 public class MouthMove : MonoBehaviour
 {
     // 音声入力デバイス選択表示
-    public Text Text;
     string DeviceName;
 
     // 平滑化
@@ -39,7 +38,7 @@ public class MouthMove : MonoBehaviour
             }
             else
             {
-                Text.text += $"Device named “{DeviceName}” do not exists.\n\n";
+                Canvas.DisplayMessage($"Device named “{DeviceName}” do not exists.");
                 DeviceName = null;
             }
         }
@@ -73,12 +72,13 @@ public class MouthMove : MonoBehaviour
     IEnumerator SelectMicrophone()
     {
         // 一覧表示
-        Text.text += "Device to move mouth.\n\n";
+        var text = "Device to move mouth.\n\n";
         for (int i = 0; i < Microphone.devices.Length; i++)
         {
-            Text.text += "[" + i + "]" + Microphone.devices[i] + "\n";
+            text += "[" + i + "]" + Microphone.devices[i] + "\n";
         }
-        Text.text += "\nPlease select with number key.";
+        text += "\nPlease select with number key.";
+        Canvas.DisplayMessage(text);
 
         // 選択待機
         while (true)
@@ -90,7 +90,7 @@ public class MouthMove : MonoBehaviour
                     // 録音開始
                     DeviceName = Microphone.devices[i];
                     StartRecording();
-                    Text.text = "";
+                    Canvas.ClearMessage();
                 }
             }
             yield return null;

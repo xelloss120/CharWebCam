@@ -7,15 +7,19 @@ using System.Collections.Generic;
 /// </summary>
 public static class CommandLineArgs
 {
+    public static readonly string Background;
+    public static readonly bool VirtualCamera;
     public static readonly string VRM;
     public static readonly string AudioInputDevice;
     public static readonly bool DisplayRawCameraImage;
-    public static readonly bool HideTextDefault;
+    public static bool HideTextDefault { get; set; }
 
     static readonly IEnumerable<string> Args = Environment.GetCommandLineArgs().Skip(1);
 
     static CommandLineArgs()
     {
+        Background = GetValue("--background");
+        VirtualCamera = Args.Contains("--virtual-camera");
         VRM = GetValue("--vrm");
         AudioInputDevice = GetValue("--audio-input-device");
         DisplayRawCameraImage = Args.Contains("--display-raw-camera-image");

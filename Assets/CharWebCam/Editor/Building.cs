@@ -21,6 +21,7 @@ internal class Building
         AddRealSenseSDKLicenseFile(directoryPath);
         RemoveUnnecessaryFiles(directoryPath);
         AddDefaultModel(directoryPath);
+        AddVirtualCameraDevice(directoryPath);
     }
 
     /// <summary>
@@ -84,8 +85,29 @@ internal class Building
     /// </summary>
     static void AddDefaultModel(string directoryPath)
     {
-        var source = new DirectoryInfo(RuntimeVRMLoader.GetDefaultModelPath()).Parent;
-        CopyDirectoryRecursively(source, Path.Combine(directoryPath, source.Name));
+        CopyDirectoryRecursively(Path.GetDirectoryName(RuntimeVRMLoader.GetDefaultModelPath()), directoryPath);
+    }
+
+    /// <summary>
+    /// 仮想カメラデバイスのdllを同梱する
+    /// </summary>
+    static void AddVirtualCameraDevice(string directoryPath)
+    {
+        CopyDirectoryRecursively(
+            Path.Combine(Path.GetDirectoryName(Application.dataPath), "UnityCaptureFilter"),
+            directoryPath
+        );
+    }
+
+    /// <summary>
+    /// ディレクトリを再帰的にコピーする
+    /// </summary>
+    /// <param name="sourcePath"></param>
+    /// <param name="destinationParentPath"></param>
+    static void CopyDirectoryRecursively(string sourcePath, string destinationParentPath)
+    {
+        var source = new DirectoryInfo(sourcePath);
+        CopyDirectoryRecursively(source, Path.Combine(destinationParentPath, source.Name));
     }
 
     /// <summary>

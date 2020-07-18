@@ -27,6 +27,25 @@ Intelの第4世代以降のCPU
 ※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
 
 ### コマンドライン引数
+#### `--background`
+背景画像 (.png / .jpg) を絶対パスで、または背景色を `#` から始まるRGB各2桁の16進数で指定します。
+
+##### 例
+- `CharWebCam.exe "--background=C:\Users\charwebcam\Documents\マイルーム (朝).png"`
+- `CharWebCam.exe --background=#0000FF`
+	+ ブルーバックにします。
+
+#### `--virtual-camera`
+仮想カメラデバイス「Unity Video Capture」へウィンドウ内容を出力します。
+
+##### Unity Video Captureのインストール
+`CharWebCam.exe` と同じフォルダにある `UnityCaptureFilter` フォルダ内の `Install.bat` を実行します。
+
+##### 既知の不具合
+Unityで発生している以下の不具合により、この指定を行うと、
+ウィンドウからフォーカスが外れたとき、しばらく応答なし状態になります。
+https://issuetracker.unity3d.com/issues/application-becomes-not-responding-when-switching-focus-in-a-x86-64-build
+
 #### `--vrm`
 読み込むVRMファイルを絶対パスで指定します。
 
@@ -78,6 +97,18 @@ https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
 ### Assets/RSSDK
 Intel RealSense SDK License October 2015 Version  
 https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
+
+### Assets/UnityCapture
+Zlib  
+Copyright (c) 2018 Bernhard Schelling / Feature contributors: Brandon J Matthews  
+Copyright (c) 2016 MHD Yamen Saraiji  
+https://github.com/schellingb/UnityCapture/tree/fe461e8f6e1cd1e6a0dfa9891147c8e393a20a2c#license
+
+### UnityCaptureFilter
+MIT  
+Copyright (c) 2018 Bernhard Schelling / Feature contributors: Brandon J Matthews  
+Copyright (c) 2016 MHD Yamen Saraiji  
+https://github.com/schellingb/UnityCapture/tree/fe461e8f6e1cd1e6a0dfa9891147c8e393a20a2c#license
 
 ### DefaultModel/unitychan.vrm<br>Assets/UnityChan/WAIT00.anim
 © Unity Technologies Japan/UCL  
