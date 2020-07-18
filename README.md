@@ -3,6 +3,10 @@
 
 VRMファイルがあれば、Unityちゃんの代わりに好きなアバターを動かすこともできます。
 
+|||
+|---|---|
+| ![](readme-sample1.png) | ![](readme-sample2.png) |
+
 ## 動かすのに必要なもの
 Intelの第4世代以降のCPU
 
@@ -97,6 +101,8 @@ https://github.com/vrm-c/UniVRMTest/blob/VRMViewer_v1.05/LICENSE.txt
 ### Assets/RSSDK
 Intel RealSense SDK License October 2015 Version  
 https://software.intel.com/content/dam/develop/external/us/en/documents/intel-realsense-sdk-license-843462.pdf
+
+### DefaultModel/unitychan.vrm<br>Assets/UnityChan/WAIT00.anim<br>readme-sample1.png<br>readme-sample2.png
 
 ### Assets/UnityCapture
 Zlib  
