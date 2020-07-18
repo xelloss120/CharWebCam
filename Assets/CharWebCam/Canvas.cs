@@ -12,12 +12,44 @@ public class Canvas : MonoBehaviour
         public IEnumerable<string> Strings;
     }
 
+    public static Canvas Instance;
+
     public Text Text;
     public Text DetectedValue;
     public RawImage RawImage;
 
+    /// <summary>
+    /// メッセージを表示
+    /// </summary>
+    /// <remarks>
+    /// 「--hide-text-default」を無効化し、すでに非表示になっていれば再表示する
+    /// </remarks>
+    /// <param name="message">表示するメッセージ。前後に改行は不要</param>
+    public static void DisplayMessage(string message)
+    {
+        CommandLineArgs.HideTextDefault = false;
+        Instance.Text.text += message + "\n\n";
+        if (!Instance.gameObject.activeSelf)
+        {
+            Instance.DetectedValue.gameObject.SetActive(false);
+            Instance.RawImage.gameObject.SetActive(false);
+            Instance.gameObject.SetActive(true);
+            Instance.StartCoroutine("GetKeyEsc");
+        }
+    }
+
+    /// <summary>
+    /// メッセージをクリア
+    /// </summary>
+    public static void ClearMessage()
+    {
+        Instance.Text.text = "";
+    }
+
     async void Start()
     {
+        Instance = this;
+
         var avatar = await GetComponent<RuntimeVRMLoader>().Load();
         if (avatar == null)
         {

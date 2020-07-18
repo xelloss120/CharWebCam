@@ -16,7 +16,6 @@ public class RuntimeVRMLoader : MonoBehaviour
         public string[] Strings = new string[0];
     }
 
-    public Text Text;
     public VRMPreviewUI ModalWindowPrefab;
 
     /// <summary>
@@ -171,10 +170,8 @@ public class RuntimeVRMLoader : MonoBehaviour
     void DisplayLoadingError(string path, Exception exception)
     {
         Debug.LogError(exception);
-
-        Text.text += "Failed to load the specified VRM file.\n"
+        Canvas.DisplayMessage("Failed to load the specified VRM file.\n"
             + $"Path: {path}\n"
-            + $"Error message:\n{exception.Message}\n"
-            + "\n";
+            + $"Error message:\n{exception.Message}");
     }
 }

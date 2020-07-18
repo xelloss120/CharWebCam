@@ -11,7 +11,7 @@ public static class CommandLineArgs
     public static readonly string VRM;
     public static readonly string AudioInputDevice;
     public static readonly bool DisplayRawCameraImage;
-    public static readonly bool HideTextDefault;
+    public static bool HideTextDefault { get; set; }
 
     static readonly IEnumerable<string> Args = Environment.GetCommandLineArgs().Skip(1);
 

@@ -132,8 +132,7 @@ public class RealSense : MonoBehaviour
         }
         catch (Exception e)
         {
-            Canvas.Text.text += "RealSense Error\n";
-            Canvas.Text.text += e.Message;
+            Canvas.DisplayMessage("RealSense Error\n" + e.Message);
         }
     }
 
