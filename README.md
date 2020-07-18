@@ -27,6 +27,14 @@ Intelの第4世代以降のCPU
 ※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
 
 ### コマンドライン引数
+#### `--background`
+背景画像 (.png / .jpg) を絶対パスで、または背景色を `#` から始まるRGB各2桁の16進数で指定します。
+
+##### 例
+- `CharWebCam.exe "--background=C:\Users\charwebcam\Documents\マイルーム (朝).png"`
+- `CharWebCam.exe --background=#0000FF`
+	+ ブルーバックにします。
+
 #### `--virtual-camera`
 仮想カメラデバイス「Unity Video Capture」へウィンドウ内容を出力します。
 

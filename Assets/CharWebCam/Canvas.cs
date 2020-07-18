@@ -15,6 +15,7 @@ public class Canvas : MonoBehaviour
     public static Canvas Instance;
 
     public Text Text;
+    public Image TextBackround;
     public Text DetectedValue;
     public RawImage RawImage;
 
@@ -29,6 +30,7 @@ public class Canvas : MonoBehaviour
     {
         CommandLineArgs.HideTextDefault = false;
         Instance.Text.text += message + "\n\n";
+        Instance.TextBackround.gameObject.SetActive(true);
         if (!Instance.gameObject.activeSelf)
         {
             Instance.DetectedValue.gameObject.SetActive(false);
@@ -39,11 +41,12 @@ public class Canvas : MonoBehaviour
     }
 
     /// <summary>
-    /// メッセージをクリア
+    /// メッセージとメッセージの背景をクリア
     /// </summary>
     public static void ClearMessage()
     {
         Instance.Text.text = "";
+        Instance.TextBackround.gameObject.SetActive(false);
     }
 
     async void Start()
