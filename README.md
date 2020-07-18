@@ -27,6 +27,17 @@ Intelの第4世代以降のCPU
 ※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
 
 ### コマンドライン引数
+#### `--virtual-camera`
+仮想カメラデバイス「Unity Video Capture」へウィンドウ内容を出力します。
+
+##### Unity Video Captureのインストール
+`CharWebCam.exe` と同じフォルダにある `UnityCaptureFilter` フォルダ内の `Install.bat` を実行します。
+
+##### 既知の不具合
+Unityで発生している以下の不具合により、この指定を行うと、
+ウィンドウからフォーカスが外れたとき、しばらく応答なし状態になります。
+https://issuetracker.unity3d.com/issues/application-becomes-not-responding-when-switching-focus-in-a-x86-64-build
+
 #### `--vrm`
 読み込むVRMファイルを絶対パスで指定します。
 

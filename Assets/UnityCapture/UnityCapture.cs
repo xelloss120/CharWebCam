@@ -1,4 +1,4 @@
-﻿/*
+/*
   Unity Capture
   Copyright (c) 2018 Bernhard Schelling
 

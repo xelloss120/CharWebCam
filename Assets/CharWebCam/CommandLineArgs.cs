@@ -7,6 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public static class CommandLineArgs
 {
+    public static readonly bool VirtualCamera;
     public static readonly string VRM;
     public static readonly string AudioInputDevice;
     public static readonly bool DisplayRawCameraImage;
@@ -16,6 +17,7 @@ public static class CommandLineArgs
 
     static CommandLineArgs()
     {
+        VirtualCamera = Args.Contains("--virtual-camera");
         VRM = GetValue("--vrm");
         AudioInputDevice = GetValue("--audio-input-device");
         DisplayRawCameraImage = Args.Contains("--display-raw-camera-image");
