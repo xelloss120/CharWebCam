@@ -17,15 +17,29 @@ internal class Building
     static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
     {
         var directoryPath = Path.GetDirectoryName(pathToBuiltProject);
-        AddLicenseFile(directoryPath);
+        AddReadmeFile(directoryPath);
+        AddRealSenseSDKLicenseFile(directoryPath);
         RemoveUnnecessaryFiles(directoryPath);
         AddDefaultModel(directoryPath);
+        AddVirtualCameraDevice(directoryPath);
     }
 
     /// <summary>
-    /// ビルド先へライセンスファイルを追加
+    /// ビルド先へREADMEページへのショートカットを追加
     /// </summary>
-    static void AddLicenseFile(string directoryPath)
+    static void AddReadmeFile(string directoryPath)
+    {
+        File.WriteAllLines(Path.Combine(directoryPath, "README.url"), new[]
+        {
+            "[InternetShortcut]",
+            "URL=https://github.com/xelloss120/CharWebCam#readme",
+        });
+    }
+
+    /// <summary>
+    /// ビルド先へRealSense SDKのライセンスファイルを追加
+    /// </summary>
+    static void AddRealSenseSDKLicenseFile(string directoryPath)
     {
         var filePath = Path.Combine(Application.dataPath, "RSSDK/Plugins/runtime/Intel RealSense SDK RT EULA.rtf");
         File.Copy(
@@ -37,12 +51,6 @@ internal class Building
                 Path.GetFileName(filePath)
             )
         );
-
-        File.WriteAllLines(Path.Combine(directoryPath, "Licenses.url"), new[]
-        {
-            "[InternetShortcut]",
-            "URL=https://github.com/xelloss120/CharWebCam#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9",
-        });
     }
 
     /// <summary>
@@ -77,8 +85,29 @@ internal class Building
     /// </summary>
     static void AddDefaultModel(string directoryPath)
     {
-        var source = new DirectoryInfo(RuntimeVRMLoader.GetDefaultModelPath()).Parent;
-        CopyDirectoryRecursively(source, Path.Combine(directoryPath, source.Name));
+        CopyDirectoryRecursively(Path.GetDirectoryName(RuntimeVRMLoader.GetDefaultModelPath()), directoryPath);
+    }
+
+    /// <summary>
+    /// 仮想カメラデバイスのdllを同梱する
+    /// </summary>
+    static void AddVirtualCameraDevice(string directoryPath)
+    {
+        CopyDirectoryRecursively(
+            Path.Combine(Path.GetDirectoryName(Application.dataPath), "UnityCaptureFilter"),
+            directoryPath
+        );
+    }
+
+    /// <summary>
+    /// ディレクトリを再帰的にコピーする
+    /// </summary>
+    /// <param name="sourcePath"></param>
+    /// <param name="destinationParentPath"></param>
+    static void CopyDirectoryRecursively(string sourcePath, string destinationParentPath)
+    {
+        var source = new DirectoryInfo(sourcePath);
+        CopyDirectoryRecursively(source, Path.Combine(destinationParentPath, source.Name));
     }
 
     /// <summary>

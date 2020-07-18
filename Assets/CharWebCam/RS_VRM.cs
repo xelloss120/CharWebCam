@@ -76,8 +76,7 @@ public class RS_VRM : RealSense
     void SetupLipSync()
     {
         gameObject.AddComponent<AudioSource>();
-        var mm = gameObject.AddComponent<MM_VRM>();
-        mm.Text = Canvas.Text;
+        gameObject.AddComponent<MM_VRM>();
     }
 
     void Update()
