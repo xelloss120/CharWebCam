@@ -30,45 +30,45 @@ Intelの第4世代以降のCPU
 
 ※ `Surprise` はVRMのプリセットにはないVRMBlendShapeです。
 
-### コマンドライン引数
-#### `--background`
+## コマンドライン引数
+### `--background`
 背景画像 (.png / .jpg) を絶対パスで、または背景色を `#` から始まるRGB各2桁の16進数で指定します。
 
-##### 例
+#### 例
 - `CharWebCam.exe "--background=C:\Users\charwebcam\Documents\マイルーム (朝).png"`
 - `CharWebCam.exe --background=#0000FF`
 	+ ブルーバックにします。
 
-#### `--virtual-camera`
+### `--virtual-camera`
 仮想カメラデバイス「Unity Video Capture」へウィンドウ内容を出力します。
 
-##### Unity Video Captureのインストール
+#### Unity Video Captureのインストール
 `CharWebCam.exe` と同じフォルダにある `UnityCaptureFilter` フォルダ内の `Install.bat` を実行します。
 
-##### 既知の不具合
+#### 既知の不具合
 Unityで発生している以下の不具合により、この指定を行うと、
 ウィンドウからフォーカスが外れたとき、しばらく応答なし状態になります。
 https://issuetracker.unity3d.com/issues/application-becomes-not-responding-when-switching-focus-in-a-x86-64-build
 
-#### `--vrm`
+### `--vrm`
 読み込むVRMファイルを絶対パスで指定します。
 
-##### 例
+#### 例
 - `CharWebCam.exe "--vrm=C:\Users\charwebcam\Documents\unitychan (custom).vrm"`
 
-#### `--audio-input-device`
+### `--audio-input-device`
 起動時のマイクの選択を省略します。
 
-##### 例
+#### 例
 - `CharWebCam.exe --audio-input-device`
 	+ 既定のデバイスを選択します。 
 - `CharWebCam.exe "--audio-input-device=マイク (Realtek Audio)"`
 	+ 「マイク (Realtek Audio)」を選択します。
 
-#### `--display-raw-camera-image`
+### `--display-raw-camera-image`
 ウィンドウ右下へ、カメラの映像をそのまま表示します。
 
-#### `--hide-text-default`
+### `--hide-text-default`
 ウィンドウ内のテキストをデフォルトで非表示にします。  
 `--audio-input-device` の指定がない場合は、マイク入力なしとなります。  
 この指定を行うと、`--display-raw-camera-image` は無視されます。
